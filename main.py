@@ -14,7 +14,7 @@ class MyWidget(QMainWindow):
 
         uic.loadUi('main.ui', self)
 
-        self.pushButton.clicked.connect(self.starting)
+        self.pushStart.clicked.connect(self.starting)
 
     def starting(self):
         global window
