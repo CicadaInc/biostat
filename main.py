@@ -12,7 +12,7 @@ class MyWidget(QMainWindow):
         self.fone.move(0, 0)
         self.fone.setPixmap(QPixmap("image.jpg").scaled(800, 500))
         uic.loadUi('main.ui', self)
-        self.pushButton.clicked.connect(self.run)
+        self.pushStart.clicked.connect(self.run)
 
     def run(self):
         pass
