@@ -23,16 +23,41 @@
       <x>570</x>
       <y>240</y>
       <width>211</width>
-      <height>30</height>
+      <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>verdana</family>
+      <pointsize>13</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="mouseTracking">
+     <bool>true</bool>
+    </property>
+    <property name="tabletTracking">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
-     <string notr="true">font: 13pt &quot;Constantia&quot;;
-background-color: rgb(249, 222, 149);
-</string>
+     <string notr="true">font: 13pt &quot;verdana&quot;;
+/*background-color: rgb(249, 222, 149);*/
+background-color: rgb(255, 255, 255);
+border-radius: 8px;
+border: 2px solid #9a9;
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5);
+selection-color: rgb(170, 255, 127);</string>
     </property>
     <property name="text">
      <string>СТАРТ</string>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="pushStatistic">
@@ -46,7 +71,7 @@ background-color: rgb(249, 222, 149);
     </property>
     <property name="styleSheet">
      <string notr="true">font: 13pt &quot;Constantia&quot;;
-background-color: rgb(249, 222, 150);
+background-color: rgb(249, 222, 149);
 </string>
     </property>
     <property name="text">
@@ -118,6 +143,8 @@ font: 13pt &quot;Constantia&quot;;
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="D:/Graphics/Avto/KIA/1-full.jpg"/>
+ </resources>
  <connections/>
 </ui>
