@@ -46,7 +46,7 @@ background-color: rgb(249, 222, 149);
     </property>
     <property name="styleSheet">
      <string notr="true">font: 13pt &quot;Constantia&quot;;
-background-color: rgb(249, 222, 149);
+background-color: rgb(249, 222, 150);
 </string>
     </property>
     <property name="text">
