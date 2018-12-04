@@ -3,9 +3,8 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
 from PyQt5.QtGui import QPixmap
 
-'''Основной класс (от него идут все окна программы)'''
 
-
+# Main class
 class BioStat(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -16,9 +15,7 @@ class BioStat(QMainWindow):
         self.startWin = StartWindow()
 
 
-'''Основное меню'''
-
-
+# Main menu
 class MainMenu(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -26,12 +23,14 @@ class MainMenu(QMainWindow):
         self.show()
 
     def init_UI(self):
+        # Установка фона
         set_fone(self)
 
+        # Загрузка GUI
         uic.loadUi('main.ui', self)
 
+        # Подкличение функционала к кнопкам
         self.pushStart.clicked.connect(self.starting)
-        self.pushStatistic.clicked.connect(self.stat)
 
     def starting(self):
         global prog
@@ -39,13 +38,8 @@ class MainMenu(QMainWindow):
         BioStat.starting(prog)  # Запуск окна старта из основного класса
         self.hide()
 
-    def stat(self):
-        pass
 
-
-'''Окно при нажатии на старт'''
-
-
+# Window start
 class StartWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -53,9 +47,17 @@ class StartWindow(QMainWindow):
         self.show()
 
     def init_UI(self):
+        # Установка фона
         set_fone(self)
 
-        uic.loadUi('main.ui', self)
+        # Загрузка GUI
+        uic.loadUi('start.ui', self)
+
+    def searching(self):  # Search button
+        pass
+
+    def backToMain(self):  # Back to main window button
+        pass
 
 
 def set_fone(self):  # Установка фона для окон
