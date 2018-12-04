@@ -58,7 +58,7 @@ def set_fone(self):  # Установка фона для окон
     self.fone = QLabel(self)
     self.fone.resize(900, 600)
     self.fone.move(0, 0)
-    self.fone.setPixmap(QPixmap("image.jpg").scaled(900, 600))
+    self.fone.setPixmap(QPixmap("image.jpg").scaled(901, 600))
 
 
 app = QApplication(sys.argv)
