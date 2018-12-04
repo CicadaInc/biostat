@@ -15,11 +15,18 @@ class MyWidget(QMainWindow):
         uic.loadUi('main.ui', self)
 
         self.pushStart.clicked.connect(self.starting)
+        self.pushStatistic.clicked.connect(self.stat)
+
+        self.lbl = QLabel(self)
+        self.lbl.resize(300, 300)
 
     def starting(self):
-        global window
-        window = MyWidget1()
-        window.show()
+        #self.window = MyWidget1()
+        #self.window.show()
+        self.pushStart.hide()
+
+    def stat(self):
+        self.lbl.setText('ldpawlfpawlfpawga')
 
 
 class MyWidget1(QMainWindow):
