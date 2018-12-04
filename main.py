@@ -9,9 +9,6 @@ class BioStat(QMainWindow):
     def __init__(self):
         super().__init__()
         self.mainWin = MainMenu()
-        self.hide()
-
-    def starting(self):
         self.startWin = StartWindow()
 
 
@@ -19,6 +16,7 @@ class BioStat(QMainWindow):
 class MainMenu(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.setFixedSize(800, 500)
         self.init_UI()
         self.show()
 
@@ -35,7 +33,7 @@ class MainMenu(QMainWindow):
     def starting(self):
         global prog
 
-        BioStat.starting(prog)  # Запуск окна старта из основного класса
+        prog.startWin.show()  # Запуск окна старта
         self.hide()
 
 
@@ -43,8 +41,8 @@ class MainMenu(QMainWindow):
 class StartWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.setFixedSize(800, 500)
         self.init_UI()
-        self.show()
 
     def init_UI(self):
         # Установка фона
@@ -53,11 +51,16 @@ class StartWindow(QMainWindow):
         # Загрузка GUI
         uic.loadUi('start.ui', self)
 
+        self.pushBack.clicked.connect(self.back_to_main)
+
     def searching(self):  # Search button
         pass
 
-    def backToMain(self):  # Back to main window button
-        pass
+    def back_to_main(self):  # Back to main window button
+        global prog
+
+        prog.mainWin.show()  # Запуск окна старта
+        self.hide()
 
 
 def set_fone(self):  # Установка фона для окон
