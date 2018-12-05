@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>BioStat</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="version">
@@ -81,7 +81,7 @@ selection-color: rgb(170, 255, 127);</string>
      <string>OK</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushBack">
+   <widget class="QPushButton" name="pushBackFromStart">
     <property name="geometry">
      <rect>
       <x>660</x>

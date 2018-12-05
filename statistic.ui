@@ -14,7 +14,7 @@
    <string>BioStat</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushBack">
+   <widget class="QPushButton" name="pushBackFromStatistic">
     <property name="geometry">
      <rect>
       <x>660</x>
