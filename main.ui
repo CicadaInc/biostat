@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>500</height>
+    <width>798</width>
+    <height>499</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>BioStat</string>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -51,7 +51,10 @@ background-color: rgb(255, 255, 255);
 border-radius: 2px;
 border: 2px solid #9a9;
 box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5);
-selection-color: rgb(170, 255, 127);</string>
+selection-color: rgb(170, 255, 127);
+selection-color: rgb(255, 248, 41);
+hover{background: green; border:none;}
+alternate-background-color: rgb(255, 220, 79);</string>
     </property>
     <property name="text">
      <string>СТАРТ</string>
@@ -164,8 +167,6 @@ selection-color: rgb(170, 255, 127);</string>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources>
-  <include location="D:/Graphics/Avto/KIA/1-full.jpg"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
