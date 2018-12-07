@@ -45,16 +45,12 @@
      <bool>true</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 13pt &quot;verdana&quot;;
-/*background-color: rgb(249, 222, 149);*/
-background-color: rgb(255, 255, 255);
-border-radius: 2px;
-border: 2px solid #9a9;
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5);
-selection-color: rgb(170, 255, 127);
-selection-color: rgb(255, 248, 41);
-hover{background: green; border:none;}
-alternate-background-color: rgb(255, 220, 79);</string>
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
+background-color: rgb(255, 255, 255); 
+border-radius: 2px; 
+border: 2px solid #9a9; 
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
     <property name="text">
      <string>СТАРТ</string>
@@ -76,13 +72,12 @@ alternate-background-color: rgb(255, 220, 79);</string>
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 13pt &quot;verdana&quot;;
-/*background-color: rgb(249, 222, 149);*/
-background-color: rgb(255, 255, 255);
-border-radius: 2px;
-border: 2px solid #9a9;
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5);
-selection-color: rgb(170, 255, 127);</string>
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
+background-color: rgb(255, 255, 255); 
+border-radius: 2px; 
+border: 2px solid #9a9; 
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
     <property name="text">
      <string>СТАТИСТИКА</string>
@@ -101,13 +96,12 @@ selection-color: rgb(170, 255, 127);</string>
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 13pt &quot;verdana&quot;;
-/*background-color: rgb(249, 222, 149);*/
-background-color: rgb(255, 255, 255);
-border-radius: 2px;
-border: 2px solid #9a9;
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5);
-selection-color: rgb(170, 255, 127);</string>
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
+background-color: rgb(255, 255, 255); 
+border-radius: 2px; 
+border: 2px solid #9a9; 
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
     <property name="text">
      <string>ОЧИСТИТЬ ПРОГРЕСС</string>
@@ -142,13 +136,12 @@ selection-color: rgb(170, 255, 127);</string>
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 13pt &quot;verdana&quot;;
-/*background-color: rgb(249, 222, 149);*/
-background-color: rgb(255, 255, 255);
-border-radius: 2px;
-border: 2px solid #9a9;
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5);
-selection-color: rgb(170, 255, 127);</string>
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
+background-color: rgb(255, 255, 255); 
+border-radius: 2px; 
+border: 2px solid #9a9; 
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
     <property name="text">
      <string>О ПРОГРАММЕ</string>
