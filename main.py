@@ -2,10 +2,13 @@ import sys
 import sqlite3
 import re
 import string
+# import Stemmer
+import numpy as np
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
 from PyQt5.QtGui import QPixmap, QIcon
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
+from PyQt5.QtWidgets import QInputDialog
 
 
 # Main class
@@ -77,13 +80,9 @@ class StartWindow(QMainWindow):
         self.productSlider.setMaximum(30)
         self.productSlider.setValue(30)
         self.productSlider.valueChanged.connect(self.move_slider)
+        self.productSlider.hide()
 
-        self.searching()
-
-        for i in range(1, min(8, len(self.needs) + 1)):
-            eval('self.pushProduct_' + str(i) + '.setText(self.needs[i - 1])')
-        self.productSlider.setMaximum(len(self.needs))
-        self.productSlider.setValue(len(self.needs))
+        self.hide_products()
 
         self.pushBackFromStart.clicked.connect(lambda: back_to_main(self))
         self.pushOkSearch.clicked.connect(self.searching)
@@ -96,12 +95,7 @@ class StartWindow(QMainWindow):
             eval('self.pushProduct_' + str(i) + '.setText(self.needs[i - 1 + ' + str(size) + '])')
             eval('self.pushProduct_' + str(i) + '.show()')
 
-    def hide_products(self):
-        for i in range(1, 8):
-            eval('self.pushProduct_' + str(i) + '.hide()')
-
     def searching(self):  # Search button
-        self.hide_products()
         text = self.textSearch.toPlainText()
         self.needs = []
         for item in PRODUCTS_DICT:
@@ -112,15 +106,21 @@ class StartWindow(QMainWindow):
         self.productSlider.setMaximum(len(self.needs))
         self.productSlider.setValue(len(self.needs))
 
+        self.hide_products()
+        self.productSlider.show()
         for i in range(1, min(8, len(self.needs) + 1)):
             eval('self.pushProduct_' + str(i) + '.setText(self.needs[i - 1])')
             eval('self.pushProduct_' + str(i) + '.show()')
 
-    def add_count(self, btn):
-        global prog, choose
+    def hide_products(self):
+        for i in range(1, 8):
+            eval('self.pushProduct_' + str(i) + '.hide()')
 
-        choose = btn.text()
+    def add_count(self, btn):
+        global prog, g
+
         prog.dialogWin.show()  # Запуск окна старта
+        prog.resultWin.initUI(btn, g)
 
 
 class StatisticWindow(QMainWindow):
@@ -163,8 +163,10 @@ class DialogCount(QMainWindow):
         self.pushOkCount.clicked.connect(self.run)
 
     def run(self):
+        global g
+
+        g = self.spinBox.value()
         self.hide()
-        prog.resultWin.initUI(float(self.spinBox.value()) / 100)
         prog.resultWin.show()
 
 
@@ -174,15 +176,14 @@ class Result(QMainWindow):
         self.setFixedSize(400, 210)
         uic.loadUi('result.ui', self)
 
-    def initUI(self, g):
-        global choose
+    def initUI(self, choose, g):
 
+        choose = choose.text()
         print(g)
-        self.label_1.setText('Жиры: ' + str(round(float(PRODUCTS_DICT[choose][0]) * g, 2)))
-        self.label_2.setText('Белки: ' + str(round(float(PRODUCTS_DICT[choose][1]) * g, 2)))
-        self.label_3.setText('Углеводы: ' + str(round(float(PRODUCTS_DICT[choose][2]) * g, 2)))
-        self.label_4.setText('Ккал: ' + str(round(float(PRODUCTS_DICT[choose][3]) * g, 2)))
-
+        self.label_1.setText('Жиры: ' + PRODUCTS_DICT[choose][0])
+        self.label_2.setText('Белки: ' + PRODUCTS_DICT[choose][1])
+        self.label_3.setText('Углеводы: ' + PRODUCTS_DICT[choose][2])
+        self.label_4.setText('Ккал: ' + PRODUCTS_DICT[choose][3])
         self.pushOkResult.clicked.connect(self.hide)
 
 
