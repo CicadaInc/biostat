@@ -2,13 +2,10 @@ import sys
 import sqlite3
 import re
 import string
-# import Stemmer
-import numpy as np
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
 from PyQt5.QtGui import QPixmap, QIcon
-from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
-from PyQt5.QtWidgets import QInputDialog
+from PyQt5.QtWidgets import QApplication
 
 
 # Main class
@@ -117,10 +114,10 @@ class StartWindow(QMainWindow):
             eval('self.pushProduct_' + str(i) + '.hide()')
 
     def add_count(self, btn):
-        global prog, g
+        global prog, choose
 
+        choose = btn.text()
         prog.dialogWin.show()  # Запуск окна старта
-        prog.resultWin.initUI(btn, g)
 
 
 class StatisticWindow(QMainWindow):
@@ -163,10 +160,9 @@ class DialogCount(QMainWindow):
         self.pushOkCount.clicked.connect(self.run)
 
     def run(self):
-        global g
-
-        g = self.spinBox.value()
+        g = float(self.spinBox.value()) / 100
         self.hide()
+        prog.resultWin.initUI(g)
         prog.resultWin.show()
 
 
@@ -176,14 +172,14 @@ class Result(QMainWindow):
         self.setFixedSize(400, 210)
         uic.loadUi('result.ui', self)
 
-    def initUI(self, choose, g):
+    def initUI(self, g):
+        global choose
 
-        choose = choose.text()
         print(g)
-        self.label_1.setText('Жиры: ' + PRODUCTS_DICT[choose][0])
-        self.label_2.setText('Белки: ' + PRODUCTS_DICT[choose][1])
-        self.label_3.setText('Углеводы: ' + PRODUCTS_DICT[choose][2])
-        self.label_4.setText('Ккал: ' + PRODUCTS_DICT[choose][3])
+        self.label_1.setText('Жиры: ' + str(round(float(PRODUCTS_DICT[choose][0]), 2)))
+        self.label_2.setText('Белки: ' + str(round(float(PRODUCTS_DICT[choose][1]), 2)))
+        self.label_3.setText('Углеводы: ' + str(round(float(PRODUCTS_DICT[choose][2]), 2)))
+        self.label_4.setText('Ккал: ' + str(round(float(PRODUCTS_DICT[choose][3]), 2)))
         self.pushOkResult.clicked.connect(self.hide)
 
 
