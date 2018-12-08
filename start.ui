@@ -33,9 +33,9 @@
    <widget class="QTextEdit" name="textSearch">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>190</x>
       <y>60</y>
-      <width>331</width>
+      <width>501</width>
       <height>31</height>
      </rect>
     </property>
@@ -113,93 +113,12 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      <string>НАЗАД</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushProduct_1">
-    <property name="geometry">
-     <rect>
-      <x>358</x>
-      <y>96</y>
-      <width>411</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
-QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
    <widget class="QPushButton" name="pushProduct_3">
     <property name="geometry">
      <rect>
-      <x>358</x>
-      <y>160</y>
-      <width>411</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
-QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="pushProduct_4">
-    <property name="geometry">
-     <rect>
-      <x>358</x>
-      <y>192</y>
-      <width>411</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
-QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="pushProduct_2">
-    <property name="geometry">
-     <rect>
-      <x>358</x>
-      <y>128</y>
-      <width>411</width>
+      <x>190</x>
+      <y>190</y>
+      <width>581</width>
       <height>23</height>
      </rect>
     </property>
@@ -224,9 +143,9 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
    <widget class="QPushButton" name="pushProduct_7">
     <property name="geometry">
      <rect>
-      <x>358</x>
-      <y>288</y>
-      <width>411</width>
+      <x>190</x>
+      <y>350</y>
+      <width>581</width>
       <height>23</height>
      </rect>
     </property>
@@ -248,66 +167,12 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      <string notr="true">buttonGroup</string>
     </attribute>
    </widget>
-   <widget class="QPushButton" name="pushProduct_9">
+   <widget class="QPushButton" name="pushProduct_4">
     <property name="geometry">
      <rect>
-      <x>358</x>
-      <y>352</y>
-      <width>411</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
-QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="pushProduct_6">
-    <property name="geometry">
-     <rect>
-      <x>358</x>
-      <y>256</y>
-      <width>411</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
-QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QPushButton" name="pushProduct_10">
-    <property name="geometry">
-     <rect>
-      <x>358</x>
-      <y>384</y>
-      <width>411</width>
+      <x>190</x>
+      <y>230</y>
+      <width>581</width>
       <height>23</height>
      </rect>
     </property>
@@ -332,9 +197,9 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
    <widget class="QPushButton" name="pushProduct_5">
     <property name="geometry">
      <rect>
-      <x>358</x>
-      <y>224</y>
-      <width>411</width>
+      <x>190</x>
+      <y>270</y>
+      <width>581</width>
       <height>23</height>
      </rect>
     </property>
@@ -356,12 +221,82 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      <string notr="true">buttonGroup</string>
     </attribute>
    </widget>
-   <widget class="QPushButton" name="pushProduct_8">
+   <widget class="QPushButton" name="pushProduct_6">
     <property name="geometry">
      <rect>
-      <x>358</x>
-      <y>320</y>
-      <width>411</width>
+      <x>190</x>
+      <y>310</y>
+      <width>581</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
+background-color: rgb(255, 255, 255); 
+border-radius: 2px; 
+border: 2px solid #9a9; 
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">buttonGroup</string>
+    </attribute>
+   </widget>
+   <widget class="QPushButton" name="pushProduct_2">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>150</y>
+      <width>581</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
+background-color: rgb(255, 255, 255); 
+border-radius: 2px; 
+border: 2px solid #9a9; 
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">buttonGroup</string>
+    </attribute>
+   </widget>
+   <widget class="QSlider" name="productSlider">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>100</y>
+      <width>31</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushProduct_1">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>110</y>
+      <width>581</width>
       <height>23</height>
      </rect>
     </property>
