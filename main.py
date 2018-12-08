@@ -80,9 +80,13 @@ class StartWindow(QMainWindow):
         self.productSlider.setMaximum(30)
         self.productSlider.setValue(30)
         self.productSlider.valueChanged.connect(self.move_slider)
-        self.productSlider.hide()
 
-        self.hide_products()
+        self.searching()
+
+        for i in range(1, min(8, len(self.needs) + 1)):
+            eval('self.pushProduct_' + str(i) + '.setText(self.needs[i - 1])')
+        self.productSlider.setMaximum(len(self.needs))
+        self.productSlider.setValue(len(self.needs))
 
         self.pushBackFromStart.clicked.connect(lambda: back_to_main(self))
         self.pushOkSearch.clicked.connect(self.searching)
@@ -95,7 +99,12 @@ class StartWindow(QMainWindow):
             eval('self.pushProduct_' + str(i) + '.setText(self.needs[i - 1 + ' + str(size) + '])')
             eval('self.pushProduct_' + str(i) + '.show()')
 
+    def hide_products(self):
+        for i in range(1, 8):
+            eval('self.pushProduct_' + str(i) + '.hide()')
+
     def searching(self):  # Search button
+        self.hide_products()
         text = self.textSearch.toPlainText()
         self.needs = []
         for item in PRODUCTS_DICT:
@@ -106,21 +115,15 @@ class StartWindow(QMainWindow):
         self.productSlider.setMaximum(len(self.needs))
         self.productSlider.setValue(len(self.needs))
 
-        self.hide_products()
-        self.productSlider.show()
         for i in range(1, min(8, len(self.needs) + 1)):
             eval('self.pushProduct_' + str(i) + '.setText(self.needs[i - 1])')
             eval('self.pushProduct_' + str(i) + '.show()')
 
-    def hide_products(self):
-        for i in range(1, 8):
-            eval('self.pushProduct_' + str(i) + '.hide()')
-
     def add_count(self, btn):
-        global prog, g
+        global prog, choose
 
+        choose = btn.text()
         prog.dialogWin.show()  # Запуск окна старта
-        prog.resultWin.initUI(btn, g)
 
 
 class StatisticWindow(QMainWindow):
@@ -163,10 +166,8 @@ class DialogCount(QMainWindow):
         self.pushOkCount.clicked.connect(self.run)
 
     def run(self):
-        global g
-
-        g = self.spinBox.value()
         self.hide()
+        prog.resultWin.initUI(float(self.spinBox.value()) / 100)
         prog.resultWin.show()
 
 
@@ -176,14 +177,15 @@ class Result(QMainWindow):
         self.setFixedSize(400, 210)
         uic.loadUi('result.ui', self)
 
-    def initUI(self, choose, g):
+    def initUI(self, g):
+        global choose
 
-        choose = choose.text()
         print(g)
-        self.label_1.setText('Жиры: ' + PRODUCTS_DICT[choose][0])
-        self.label_2.setText('Белки: ' + PRODUCTS_DICT[choose][1])
-        self.label_3.setText('Углеводы: ' + PRODUCTS_DICT[choose][2])
-        self.label_4.setText('Ккал: ' + PRODUCTS_DICT[choose][3])
+        self.label_1.setText('Жиры: ' + str(float(PRODUCTS_DICT[choose][0]) * g))
+        self.label_2.setText('Белки: ' + str(float(PRODUCTS_DICT[choose][1]) * g))
+        self.label_3.setText('Углеводы: ' + str(float(PRODUCTS_DICT[choose][2]) * g))
+        self.label_4.setText('Ккал: ' + str(float(PRODUCTS_DICT[choose][3]) * g))
+
         self.pushOkResult.clicked.connect(self.hide)
 
 
