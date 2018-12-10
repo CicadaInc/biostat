@@ -10,6 +10,11 @@
     <height>499</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>BioStat</string>
   </property>
@@ -27,13 +32,12 @@
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 13pt &quot;verdana&quot;;
-/*background-color: rgb(249, 222, 149);*/
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;;
 background-color: rgb(255, 255, 255);
 border-radius: 2px;
 border: 2px solid #9a9;
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5);
-selection-color: rgb(170, 255, 127);</string>
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
+QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
     <property name="text">
      <string>НАЗАД</string>
@@ -53,6 +57,57 @@ selection-color: rgb(170, 255, 127);</string>
     </property>
     <property name="text">
      <string>version 1.0.0</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushBuild">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>190</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;;
+background-color: rgb(255, 255, 255);
+border-radius: 2px;
+border: 2px solid #9a9;
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
+QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
+    </property>
+    <property name="text">
+     <string>Построить</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="chooseBox">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>70</y>
+      <width>111</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>verdana</family>
+      <pointsize>13</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox {font: 13pt &quot;verdana&quot;;
+background-color: rgb(255, 255, 255);
+border-radius: 2px;
+border: 2px solid #9a9;
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
+QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
    </widget>
   </widget>
