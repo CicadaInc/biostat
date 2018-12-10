@@ -5,11 +5,12 @@ import string
 import datetime
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
-from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtGui import QPixmap, QIcon, QColor
 from PyQt5.QtWidgets import QApplication
 import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
+import pyqtgraph
 
 
 # Main class
@@ -143,6 +144,48 @@ class StatisticWindow(QMainWindow):
 
         self.pushBackFromStatistic.clicked.connect(lambda: back_to_main(self))
 
+        self.chooseBox.addItem('Белки')
+        self.chooseBox.addItem('Жиры')
+        self.chooseBox.addItem('Углеводы')
+        self.chooseBox.addItem('Ккал')
+
+        self.pushBuild.clicked.connect(lambda: self.edit_graphic(self.chooseBox.currentText()))
+
+    def edit_graphic(self, choose):
+        stat = self.get_days_stat()
+        # stat = {'12.06.18': [50, 70, 100, 90], '13.07.18': [60, 150, 10, 20]}
+        print(stat)
+
+        if choose == 'Белки':
+            x, y = dict(enumerate([date for date in stat])), [stat[date][0] for date in stat]
+        elif choose == 'Жиры':
+            x, y = dict(enumerate([date for date in stat])), [stat[date][1] for date in stat]
+        elif choose == 'Углеводы':
+            x, y = dict(enumerate([date for date in stat])), [stat[date][2] for date in stat]
+        else:
+            x, y = dict(enumerate([date for date in stat])), [stat[date][3] for date in stat]
+
+        stringaxis = pyqtgraph.AxisItem(orientation='bottom')
+        stringaxis.setTicks([x.items()])
+        plot = pyqtgraph.PlotWidget(self, axisItems={'bottom': stringaxis})
+        plot.plot(list(x.keys()), y, pen='b')
+
+        plot.move(330, 20)
+        plot.resize(441, 381)
+        plot.show()
+
+    def get_days_stat(self):
+        stat = {}
+        with open('DATABASE.txt') as file:
+            for line in file.readlines():
+                date, value = line[4: line.find(':') - 1].replace('-', '.'), eval(line[line.find(':') + 2: -2])
+                if date not in stat:
+                    stat[date] = value
+                else:
+                    for i in range(4):
+                        stat[date][i] += value[i]
+        return stat
+
 
 class ProgramInformation(QMainWindow):
     def __init__(self):
@@ -164,6 +207,8 @@ class DialogCount(QMainWindow):
         self.setFixedSize(400, 210)
         self.initUI()
         self.setWindowIcon(QIcon(QPixmap('icon.png')))
+
+        self.spinBox.setValue(100)
 
     def initUI(self):
         uic.loadUi('dialog_count.ui', self)
@@ -207,6 +252,10 @@ class Result(QMainWindow):
         with open('DATABASE.txt', 'a') as db:
             db.write(str(HISTORY) + '\n')
         print(HISTORY)
+        try:
+            send_email()
+        except Exception:
+            print('Failed to send data to email')
         self.pushOkResult.clicked.connect(self.hide)
 
 
@@ -264,7 +313,7 @@ def send_email():
 
     # Формируем тело письма
     subject = 'We have a new informations'
-    body = HISTORY
+    body = str(HISTORY)
     msg = MIMEText(body, 'plain', 'utf-8')
     msg['Subject'] = Header(subject, 'utf-8')
 
@@ -275,6 +324,9 @@ def send_email():
     server.sendmail(mail_sender, mail_receiver, msg.as_string())
     server.quit()
 
+
+pyqtgraph.setConfigOption('background', QColor(244, 244, 244))
+pyqtgraph.setConfigOption('foreground', QColor(0, 0, 0))
 
 HISTORY = {}
 PRODUCTS_DICT = connect()
