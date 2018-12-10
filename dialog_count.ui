@@ -40,6 +40,11 @@ box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)</string>
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
 background-color: rgb(255, 255, 255); 
@@ -48,8 +53,14 @@ border: 2px solid #9a9;
 box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
 QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
     <property name="maximum">
      <number>1000000000</number>
+    </property>
+    <property name="singleStep">
+     <number>25</number>
     </property>
    </widget>
    <widget class="QPushButton" name="pushOkCount">

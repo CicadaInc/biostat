@@ -59,19 +59,6 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      <string>version 1.0.0</string>
     </property>
    </widget>
-   <widget class="PlotWidget" name="graph">
-    <property name="geometry">
-     <rect>
-      <x>330</x>
-      <y>20</y>
-      <width>441</width>
-      <height>381</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushBuild">
     <property name="geometry">
      <rect>
@@ -136,13 +123,6 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>PlotWidget</class>
-   <extends>QGraphicsView</extends>
-   <header>pyqtgraph</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>
