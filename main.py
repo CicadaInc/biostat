@@ -2,10 +2,14 @@ import sys
 import sqlite3
 import re
 import string
+import datetime
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
 from PyQt5.QtGui import QPixmap, QIcon, QColor
 from PyQt5.QtWidgets import QApplication
+import smtplib
+from email.mime.text import MIMEText
+from email.header import Header
 import pyqtgraph
 
 
@@ -40,6 +44,7 @@ class MainMenu(QMainWindow):
         self.pushStart.clicked.connect(self.starting)
         self.pushStatistic.clicked.connect(self.show_statistic)
         self.pushAbout.clicked.connect(self.show_program_info)
+        self.pushClean.clicked.connect(self.clean_progress)
 
     def starting(self):
         global prog
@@ -58,6 +63,11 @@ class MainMenu(QMainWindow):
 
         prog.progInfo.show()
         self.hide()
+
+    def clean_progress(self):
+        HISTORY.clear()
+        with open('DATABASE.txt', 'w') as db:
+            db.write('')
 
 
 # Window start
@@ -142,15 +152,39 @@ class StatisticWindow(QMainWindow):
         self.pushBuild.clicked.connect(lambda: self.edit_graphic(self.chooseBox.currentText()))
 
     def edit_graphic(self, choose):
-        print(choose)
+        stat = self.get_days_stat()
+        # stat = {'12.06.18': [50, 70, 100, 90], '13.07.18': [60, 150, 10, 20]}
+        print(stat)
+
         if choose == 'Белки':
-            self.graph.plot([i for i in range(10)], [i for i in range(10)], pen='b')
+            x, y = dict(enumerate([date for date in stat])), [stat[date][0] for date in stat]
         elif choose == 'Жиры':
-            self.graph.plot([i for i in range(10)], [i for i in range(10)], pen='b')
+            x, y = dict(enumerate([date for date in stat])), [stat[date][1] for date in stat]
         elif choose == 'Углеводы':
-            self.graph.plot([i for i in range(10)], [i for i in range(10)], pen='b')
+            x, y = dict(enumerate([date for date in stat])), [stat[date][2] for date in stat]
         else:
-            self.graph.plot([i for i in range(10)], [i for i in range(10)], pen='b')
+            x, y = dict(enumerate([date for date in stat])), [stat[date][3] for date in stat]
+
+        stringaxis = pyqtgraph.AxisItem(orientation='bottom')
+        stringaxis.setTicks([x.items()])
+        plot = pyqtgraph.PlotWidget(self, axisItems={'bottom': stringaxis})
+        plot.plot(list(x.keys()), y, pen='b')
+
+        plot.move(330, 20)
+        plot.resize(441, 381)
+        plot.show()
+
+    def get_days_stat(self):
+        stat = {}
+        with open('DATABASE.txt') as file:
+            for line in file.readlines():
+                date, value = line[4: line.find(':') - 1].replace('-', '.'), eval(line[line.find(':') + 2: -2])
+                if date not in stat:
+                    stat[date] = value
+                else:
+                    for i in range(4):
+                        stat[date][i] += value[i]
+        return stat
 
 
 class ProgramInformation(QMainWindow):
@@ -173,6 +207,8 @@ class DialogCount(QMainWindow):
         self.setFixedSize(400, 210)
         self.initUI()
         self.setWindowIcon(QIcon(QPixmap('icon.png')))
+
+        self.spinBox.setValue(100)
 
     def initUI(self):
         uic.loadUi('dialog_count.ui', self)
@@ -197,10 +233,25 @@ class Result(QMainWindow):
         global choose
 
         print(g)
-        self.label_1.setText('Жиры: ' + str(round(float(PRODUCTS_DICT[choose][0]) * g, 2)))
-        self.label_2.setText('Белки: ' + str(round(float(PRODUCTS_DICT[choose][1]) * g, 2)))
-        self.label_3.setText('Углеводы: ' + str(round(float(PRODUCTS_DICT[choose][2]) * g, 2)))
-        self.label_4.setText('Ккал: ' + str(round(float(PRODUCTS_DICT[choose][3]) * g, 2)))
+        fats = float(str(round(float(PRODUCTS_DICT[choose][0]) * g, 2)))
+        proteins = float(str(round(float(PRODUCTS_DICT[choose][1]) * g, 2)))
+        carbohydrates = float(str(round(float(PRODUCTS_DICT[choose][2]) * g, 2)))
+        calories = float(str(round(float(PRODUCTS_DICT[choose][3]) * g, 2)))
+        self.label_1.setText('Жиры: ' + str(fats))
+        self.label_2.setText('Белки: ' + str(proteins))
+        self.label_3.setText('Углеводы: ' + str(carbohydrates))
+        self.label_4.setText('Ккал: ' + str(calories))
+        date = str(datetime.datetime.now())[:10]
+        if date not in HISTORY:
+            HISTORY[date] = [fats, proteins, carbohydrates, calories]
+        else:
+            HISTORY[date][0] += fats
+            HISTORY[date][1] += proteins
+            HISTORY[date][2] += carbohydrates
+            HISTORY[date][3] += calories
+        with open('DATABASE.txt', 'a') as db:
+            db.write(str(HISTORY) + '\n')
+        print(HISTORY)
         self.pushOkResult.clicked.connect(self.hide)
 
 
@@ -248,9 +299,32 @@ def back_to_main(self):  # Back to main window button
     self.hide()
 
 
+def send_email():
+    # Настройки
+    mail_sender = 'biostat18@mail.ru'
+    mail_receiver = 'biostat18@mail.ru'
+    username = 'biostat18@mail.ru'
+    password = 'qwerty3301'
+    server = smtplib.SMTP('smtp.mail.ru:587')
+
+    # Формируем тело письма
+    subject = 'We have a new informations'
+    body = HISTORY
+    msg = MIMEText(body, 'plain', 'utf-8')
+    msg['Subject'] = Header(subject, 'utf-8')
+
+    # Отпавляем письмо
+    server.starttls()
+    server.ehlo()
+    server.login(username, password)
+    server.sendmail(mail_sender, mail_receiver, msg.as_string())
+    server.quit()
+
+
 pyqtgraph.setConfigOption('background', QColor(244, 244, 244))
 pyqtgraph.setConfigOption('foreground', QColor(0, 0, 0))
 
+HISTORY = {}
 PRODUCTS_DICT = connect()
 app = QApplication(sys.argv)
 prog = BioStat()
