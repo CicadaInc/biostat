@@ -1,56 +1,26 @@
-import sys
-from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QLabel
-from PyQt5.QtGui import QPixmap
+import smtplib
+from email.mime.text import MIMEText
+from email.header import Header
 
+HISTORY = 'LOL'
 
-class MainWindow(QMainWindow):
-    def __init__(self):
-        super().__init__()
+# Настройки
+mail_sender = 'biostat18@mail.ru'
+mail_receiver = 'biostat18@mail.ru'
+username = 'biostat18@mail.ru'
+password = 'qwerty3301'
+server = smtplib.SMTP('smtp.mail.ru:587')
 
-        # Добавляем фон
-        self.fone = QLabel(self)
-        self.fone.resize(800, 500)
-        self.fone.move(0, 0)
-        self.fone.setPixmap(QPixmap("image.jpg").scaled(800, 500))
+# Формируем тело письма
+subject = 'Привет всем Маркам!'
+# subject = 'Приветик ' + mail_sender + '!' # + mail_sender
+body = HISTORY
+msg = MIMEText(body, 'plain', 'utf-8')
+msg['Subject'] = Header(subject, 'utf-8')
 
-        # Загрузка GUI
-        uic.loadUi('main.ui', self)
-
-        # Подкличение функционала к кнопкам
-        self.pushStart.clicked.connect(self.starting)
-
-    def starting(self):  # Start button
-        global window
-        window = WindowStart()
-        window.show()
-
-
-class WindowStart(QMainWindow):
-    def __init__(self):
-        super().__init__()
-
-        # Добавляем фон
-        self.fone = QLabel(self)
-        self.fone.resize(800, 500)
-        self.fone.move(0, 0)
-        self.fone.setPixmap(QPixmap("image.jpg").scaled(800, 500))
-
-        # Загрузка GUI
-        uic.loadUi('start.ui', self)
-
-        # Подкличение функционала к кнопкам
-        self.pushOkSearch.clicked.connect(self.searching)
-        self.pushBack.clicked.connect(self.backToMain)
-
-    def searching(self):  # Search button
-        pass
-
-    def backToMain(self):  # Back to main window button
-        pass
-
-
-app = QApplication(sys.argv)
-ex = MainWindow()
-ex.show()
-sys.exit(app.exec_())
+# Отпавляем письмо
+server.starttls()
+server.ehlo()
+server.login(username, password)
+server.sendmail(mail_sender, mail_receiver, msg.as_string())
+server.quit()

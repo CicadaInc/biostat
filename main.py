@@ -2,13 +2,14 @@ import sys
 import sqlite3
 import re
 import string
-import Stemmer
-import numpy as np
+import datetime
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
 from PyQt5.QtGui import QPixmap, QIcon
-from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
-from PyQt5.QtWidgets import QInputDialog
+from PyQt5.QtWidgets import QApplication
+import smtplib
+from email.mime.text import MIMEText
+from email.header import Header
 
 
 # Main class
@@ -19,6 +20,8 @@ class BioStat(QMainWindow):
         self.startWin = StartWindow()
         self.statisticWin = StatisticWindow()
         self.progInfo = ProgramInformation()
+        self.dialogWin = DialogCount()
+        self.resultWin = Result()
 
 
 # Main menu
@@ -40,18 +43,7 @@ class MainMenu(QMainWindow):
         self.pushStart.clicked.connect(self.starting)
         self.pushStatistic.clicked.connect(self.show_statistic)
         self.pushAbout.clicked.connect(self.show_program_info)
-        self.button_design(self.pushStart)
-        self.button_design(self.pushStatistic)
-        self.button_design(self.pushAbout)
-        self.button_design(self.pushClean)
-
-    def button_design(self, button):
-        button.setStyleSheet('QPushButton {font: 13pt "verdana"; '
-                             'background-color: rgb(255, 255, 255); '
-                             'border-radius: 2px; '
-                             'border: 2px solid #9a9; '
-                             'box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} '
-                             'QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}')
+        self.pushClean.clicked.connect(self.clean_progress)
 
     def starting(self):
         global prog
@@ -71,6 +63,11 @@ class MainMenu(QMainWindow):
         prog.progInfo.show()
         self.hide()
 
+    def clean_progress(self):
+        HISTORY.clear()
+        with open('DATABASE.txt', 'w') as db:
+            db.write('')
+
 
 # Window start
 class StartWindow(QMainWindow):
@@ -86,73 +83,51 @@ class StartWindow(QMainWindow):
         # Загрузка GUI
         uic.loadUi('start.ui', self)
 
-        self.pushBackFromStart.clicked.connect(lambda: back_to_main(self))
-        self.button_design(self.pushBackFromStart)
-        self.pushOkSearch.clicked.connect(self.searching)
-        self.button_design(self.pushOkSearch)
+        self.productSlider.setMinimum(0)
+        self.productSlider.setMaximum(30)
+        self.productSlider.setValue(30)
+        self.productSlider.valueChanged.connect(self.move_slider)
+        self.productSlider.hide()
 
-    def button_design(self, button):
-        button.setStyleSheet('QPushButton {font: 13pt "verdana"; '
-                             'background-color: rgb(255, 255, 255); '
-                             'border-radius: 2px; '
-                             'border: 2px solid #9a9; '
-                             'box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} '
-                             'QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}')
+        self.hide_products()
+
+        self.pushBackFromStart.clicked.connect(lambda: back_to_main(self))
+        self.pushOkSearch.clicked.connect(self.searching)
+        self.buttonGroup.buttonClicked.connect(self.add_count)
+
+    def move_slider(self):
+        size = len(self.needs) - self.productSlider.value()
+        self.hide_products()
+        for i in range(1, min(8, len(self.needs) + 1 - size)):
+            eval('self.pushProduct_' + str(i) + '.setText(self.needs[i - 1 + ' + str(size) + '])')
+            eval('self.pushProduct_' + str(i) + '.show()')
 
     def searching(self):  # Search button
         text = self.textSearch.toPlainText()
-        needs = []
+        self.needs = []
         for item in PRODUCTS_DICT:
             if clearWord(text.lower()) in item:
-                needs.append(item)
-        print(needs)
+                self.needs.append(item)
+        print(self.needs)
 
-        # Почему-то кнопка не создаётся
-        for i in range(len(needs)):
-            self.pushProduct_1 = QPushButton(needs[i], self)
-            self.pushProduct_1.resize(301, 21)
-            self.pushProduct_1.move(470, 100)
-            self.button_design(self.pushProduct_1)
-        # if clearWord(text.lower()) in PRODUCTS_DICT:
-        #     print('yes')
-        # else:
-        #     print('no')
-        # # ------------------
-        #
-        # lsa = LSA()
-        # docs = [text]
-        # docs += PRODUCTS_DICT.keys()
-        #
-        # docs_copy = docs.copy()
-        #
-        # for i in range(len(docs)):
-        #     lsa.add_sentence(docs[i])
-        #
-        # for i in range(len(docs)):
-        #     docs[i] = lsa.stop_symbols(docs[i])
-        #
-        # for i in range(len(docs)):
-        #     docs[i] = lsa.my_stemmer(docs[i])
-        #
-        # similar_words = sorted(lsa.search_common_words(docs))
-        #
-        # matrix = lsa.drawing_up_the_matrix(similar_words, docs)
-        #
-        # if matrix != []:
-        #     U, S, Vt = np.linalg.svd(matrix)
-        #
-        #     coord = -1 * Vt[0:2, :]
-        #     new_coord = []
-        #
-        #     for i in range(len(docs)):
-        #         new_coord.append((round(coord[0][i], 3), round(coord[1][i], 3)))
-        #
-        #     # print(new_coord)
-        #     print(docs_copy[lsa.find_near(new_coord[0], new_coord[1:])])
-        # else:
-        #     print('К сожалению, ничего не найдено.')
-        #
-        # # ------------------
+        self.productSlider.setMaximum(len(self.needs))
+        self.productSlider.setValue(len(self.needs))
+
+        self.hide_products()
+        self.productSlider.show()
+        for i in range(1, min(8, len(self.needs) + 1)):
+            eval('self.pushProduct_' + str(i) + '.setText(self.needs[i - 1])')
+            eval('self.pushProduct_' + str(i) + '.show()')
+
+    def hide_products(self):
+        for i in range(1, 8):
+            eval('self.pushProduct_' + str(i) + '.hide()')
+
+    def add_count(self, btn):
+        global prog, choose
+
+        choose = btn.text()
+        prog.dialogWin.show()  # Запуск окна старта
 
 
 class StatisticWindow(QMainWindow):
@@ -167,15 +142,6 @@ class StatisticWindow(QMainWindow):
         uic.loadUi('statistic.ui', self)
 
         self.pushBackFromStatistic.clicked.connect(lambda: back_to_main(self))
-        self.button_design(self.pushBackFromStatistic)
-
-    def button_design(self, button):
-        button.setStyleSheet('QPushButton {font: 13pt "verdana"; '
-                             'background-color: rgb(255, 255, 255); '
-                             'border-radius: 2px; '
-                             'border: 2px solid #9a9; '
-                             'box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} '
-                             'QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}')
 
 
 class ProgramInformation(QMainWindow):
@@ -190,131 +156,58 @@ class ProgramInformation(QMainWindow):
         uic.loadUi('program_info.ui', self)
 
         self.pushBackFromInfo.clicked.connect(lambda: back_to_main(self))
-        self.button_design(self.pushBackFromInfo)
-
-    def button_design(self, button):
-        button.setStyleSheet('QPushButton {font: 13pt "verdana"; '
-                             'background-color: rgb(255, 255, 255); '
-                             'border-radius: 2px; '
-                             'border: 2px solid #9a9; '
-                             'box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} '
-                             'QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}')
 
 
-class Example(QWidget):
+class DialogCount(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.setFixedSize(400, 210)
         self.initUI()
+        self.setWindowIcon(QIcon(QPixmap('icon.png')))
 
     def initUI(self):
-        self.setGeometry(300, 300, 150, 150)
-        self.setWindowTitle('Результат')
+        uic.loadUi('dialog_count.ui', self)
 
-        self.button_1 = QPushButton(self)
-        self.button_1.move(20, 40)
-        self.button_1.setText("ОК")
-        self.button_1.clicked.connect(self.run)
-
-        self.show()
+        self.pushOkCount.clicked.connect(self.run)
 
     def run(self):
-        i, okBtnPressed = QInputDialog.getText(
-            self, "Введите имя", "Как тебя зовут?"
-        )
-        if okBtnPressed:
-            self.button_1.setText(i)
+        g = float(self.spinBox.value()) / 100
+        self.hide()
+        prog.resultWin.initUI(g)
+        prog.resultWin.show()
 
 
-class LSA:
+class Result(QMainWindow):
     def __init__(self):
-        self.docs = []
+        super().__init__()
+        self.setFixedSize(400, 210)
+        uic.loadUi('result.ui', self)
+        self.setWindowIcon(QIcon(QPixmap('icon.png')))
 
-    # Проверка на существование матрицы
-    def check_matrix(self, matrix):
-        if matrix == [] or matrix[0] == []:
-            return False
+    def initUI(self, g):
+        global choose
+
+        print(g)
+        fats = float(str(round(float(PRODUCTS_DICT[choose][0]) * g, 2)))
+        proteins = float(str(round(float(PRODUCTS_DICT[choose][1]) * g, 2)))
+        carbohydrates = float(str(round(float(PRODUCTS_DICT[choose][2]) * g, 2)))
+        calories = float(str(round(float(PRODUCTS_DICT[choose][3]) * g, 2)))
+        self.label_1.setText('Жиры: ' + str(fats))
+        self.label_2.setText('Белки: ' + str(proteins))
+        self.label_3.setText('Углеводы: ' + str(carbohydrates))
+        self.label_4.setText('Ккал: ' + str(calories))
+        date = str(datetime.datetime.now())[:10]
+        if date not in HISTORY:
+            HISTORY[date] = [fats, proteins, carbohydrates, calories]
         else:
-            return True
-
-    # Добавить предложение
-    def add_sentence(self, sentence):
-        self.docs.append(sentence)
-
-    # Удаление стоп-символов
-    def stop_symbols(self, sentence):
-        stop = ['-', 'еще', 'него', 'сказать', 'а', 'ж', 'нее', 'со', 'без', 'же', 'ней', 'совсем', 'более', 'жизнь',
-                'нельзя', 'так', 'больше', 'за', 'нет', 'такой', 'будет', 'зачем', 'ни', 'там', 'будто', 'здесь',
-                'нибудь',
-                'тебя', 'бы', 'и', 'никогда', 'тем', 'был', 'из', 'ним', 'теперь', 'была', 'из-за', 'них', 'то', 'были',
-                'или', 'ничего', 'тогда', 'было', 'им', 'но', 'того', 'быть', 'иногда', 'ну', 'тоже', 'в', 'их', 'о',
-                'только', 'вам', 'к', 'об', 'том', 'вас', 'кажется', 'один', 'тот', 'вдруг', 'как', 'он', 'три', 'ведь',
-                'какая', 'она', 'тут', 'во', 'какой', 'они', 'ты', 'вот', 'когда', 'опять', 'у', 'впрочем', 'конечно',
-                'от',
-                'уж', 'все', 'которого', 'перед', 'уже', 'всегда', 'которые', 'по', 'хорошо', 'всего', 'кто', 'под',
-                'хоть',
-                'всех', 'куда', 'после', 'чего', 'всю', 'ли', 'потом', 'человек', 'вы', 'лучше', 'потому', 'чем', 'г',
-                'между', 'почти', 'через', 'где', 'меня', 'при', 'что', 'говорил', 'мне', 'про', 'чтоб', 'да', 'много',
-                'раз', 'чтобы', 'даже', 'может', 'разве', 'чуть', 'два', 'можно', 'с', 'эти', 'для', 'мой', 'сам',
-                'этого',
-                'до', 'моя', 'свое', 'этой', 'другой', 'мы', 'свою', 'этом', 'его', 'на', 'себе', 'этот', 'ее', 'над',
-                'себя', 'эту', 'ей', 'надо', 'сегодня', 'я', 'ему', 'наконец', 'сейчас', 'если', 'нас', 'сказал',
-                'есть',
-                'не', 'сказала']
-
-        sentence = clearWord(sentence).lower().split()
-        clear_sentence = ''
-        for word in sentence:
-            if word not in stop:
-                clear_sentence += word + ' '
-        return clear_sentence.strip()
-
-    # Получает предложение и выдаёт это предложение, состоящее из основ слов
-    def my_stemmer(self, sentence):
-        stemmer = Stemmer.Stemmer('russian')
-        ready = ''
-        sentence = sentence.split()
-        for word in sentence:
-            word = stemmer.stemWord(word)
-            ready += word + ' '
-        return ready.strip()
-
-    # Поиск общих слов
-    def search_common_words(self, lst):
-        result = []
-        slov = {}
-        for i in range(len(lst)):
-            words = lst[i].split()
-            for word in words:
-                if word not in slov:
-                    slov[word] = 1
-                else:
-                    slov[word] += 1
-        keys = list(slov.keys())
-        values = list(slov.values())
-        for i in range(len(values)):
-            if values[i] > 1 and keys[i] not in result:
-                result.append(keys[i])
-        return result
-
-    # Составление матрицы
-    def drawing_up_the_matrix(self, words, sentences):
-        matrix = []
-        for i in range(len(words)):
-            matrix.append([])
-            for text in sentences:
-                text = text.split()
-                matrix[i].append(text.count(words[i]))
-        return matrix
-
-    # Поиск ближайшего предложения
-    def find_near(self, coord, other_coords):
-        values = []
-        for i in range(len(other_coords)):
-            if round(abs(coord[0] - other_coords[i][0]), 4) >= 0.1 or round(abs(coord[1] - other_coords[i][1]),
-                                                                            4) >= 0.1:
-                values.append(
-                    (round(abs(coord[0] - other_coords[i][0]), 4), round(abs(coord[1] - other_coords[i][1]), 4)))
-        return other_coords.index(other_coords[values.index(min(values))]) + 1
+            HISTORY[date][0] += fats
+            HISTORY[date][1] += proteins
+            HISTORY[date][2] += carbohydrates
+            HISTORY[date][3] += calories
+        with open('DATABASE.txt', 'a') as db:
+            db.write(str(HISTORY) + '\n')
+        print(HISTORY)
+        self.pushOkResult.clicked.connect(self.hide)
 
 
 def connect():
@@ -348,6 +241,7 @@ def clearWord(word):
 
 def set_background(self):  # Установка фона для окон
     self.setWindowIcon(QIcon(QPixmap('icon.png')))
+
     self.bg = QLabel(self)
     self.bg.resize(900, 600)
     self.bg.setPixmap(QPixmap("image.jpg").scaled(900, 600))
@@ -360,6 +254,29 @@ def back_to_main(self):  # Back to main window button
     self.hide()
 
 
+def send_email():
+    # Настройки
+    mail_sender = 'biostat18@mail.ru'
+    mail_receiver = 'biostat18@mail.ru'
+    username = 'biostat18@mail.ru'
+    password = 'qwerty3301'
+    server = smtplib.SMTP('smtp.mail.ru:587')
+
+    # Формируем тело письма
+    subject = 'We have a new informations'
+    body = HISTORY
+    msg = MIMEText(body, 'plain', 'utf-8')
+    msg['Subject'] = Header(subject, 'utf-8')
+
+    # Отпавляем письмо
+    server.starttls()
+    server.ehlo()
+    server.login(username, password)
+    server.sendmail(mail_sender, mail_receiver, msg.as_string())
+    server.quit()
+
+
+HISTORY = {}
 PRODUCTS_DICT = connect()
 app = QApplication(sys.argv)
 prog = BioStat()
