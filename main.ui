@@ -21,7 +21,7 @@
     <property name="geometry">
      <rect>
       <x>570</x>
-      <y>240</y>
+      <y>190</y>
       <width>211</width>
       <height>41</height>
      </rect>
@@ -45,11 +45,11 @@
      <bool>true</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;;
+background-color: rgb(255, 255, 255);
+border-radius: 2px;
+border: 2px solid #9a9;
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
 QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
     <property name="text">
@@ -63,7 +63,7 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
     <property name="geometry">
      <rect>
       <x>570</x>
-      <y>300</y>
+      <y>250</y>
       <width>211</width>
       <height>30</height>
      </rect>
@@ -72,11 +72,11 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;;
+background-color: rgb(255, 255, 255);
+border-radius: 2px;
+border: 2px solid #9a9;
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
 QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
     <property name="text">
@@ -96,11 +96,11 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;;
+background-color: rgb(255, 255, 255);
+border-radius: 2px;
+border: 2px solid #9a9;
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
 QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
     <property name="text">
@@ -136,15 +136,39 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;;
+background-color: rgb(255, 255, 255);
+border-radius: 2px;
+border: 2px solid #9a9;
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
 QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
     <property name="text">
      <string>О ПРОГРАММЕ</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushRecommendations">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>300</y>
+      <width>211</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;;
+background-color: rgb(255, 255, 255);
+border-radius: 2px;
+border: 2px solid #9a9;
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
+QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
+    </property>
+    <property name="text">
+     <string>СОВЕТЫ</string>
     </property>
    </widget>
   </widget>

@@ -4,8 +4,9 @@ import re
 import string
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
-from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtGui import QPixmap, QIcon, QColor
 from PyQt5.QtWidgets import QApplication
+import pyqtgraph
 
 
 # Main class
@@ -133,6 +134,24 @@ class StatisticWindow(QMainWindow):
 
         self.pushBackFromStatistic.clicked.connect(lambda: back_to_main(self))
 
+        self.chooseBox.addItem('Белки')
+        self.chooseBox.addItem('Жиры')
+        self.chooseBox.addItem('Углеводы')
+        self.chooseBox.addItem('Ккал')
+
+        self.pushBuild.clicked.connect(lambda: self.edit_graphic(self.chooseBox.currentText()))
+
+    def edit_graphic(self, choose):
+        print(choose)
+        if choose == 'Белки':
+            self.graph.plot([i for i in range(10)], [i for i in range(10)], pen='b')
+        elif choose == 'Жиры':
+            self.graph.plot([i for i in range(10)], [i for i in range(10)], pen='b')
+        elif choose == 'Углеводы':
+            self.graph.plot([i for i in range(10)], [i for i in range(10)], pen='b')
+        else:
+            self.graph.plot([i for i in range(10)], [i for i in range(10)], pen='b')
+
 
 class ProgramInformation(QMainWindow):
     def __init__(self):
@@ -153,6 +172,7 @@ class DialogCount(QMainWindow):
         super().__init__()
         self.setFixedSize(400, 210)
         self.initUI()
+        self.setWindowIcon(QIcon(QPixmap('icon.png')))
 
     def initUI(self):
         uic.loadUi('dialog_count.ui', self)
@@ -171,15 +191,16 @@ class Result(QMainWindow):
         super().__init__()
         self.setFixedSize(400, 210)
         uic.loadUi('result.ui', self)
+        self.setWindowIcon(QIcon(QPixmap('icon.png')))
 
     def initUI(self, g):
         global choose
 
         print(g)
-        self.label_1.setText('Жиры: ' + str(round(float(PRODUCTS_DICT[choose][0]), 2)))
-        self.label_2.setText('Белки: ' + str(round(float(PRODUCTS_DICT[choose][1]), 2)))
-        self.label_3.setText('Углеводы: ' + str(round(float(PRODUCTS_DICT[choose][2]), 2)))
-        self.label_4.setText('Ккал: ' + str(round(float(PRODUCTS_DICT[choose][3]), 2)))
+        self.label_1.setText('Жиры: ' + str(round(float(PRODUCTS_DICT[choose][0]) * g, 2)))
+        self.label_2.setText('Белки: ' + str(round(float(PRODUCTS_DICT[choose][1]) * g, 2)))
+        self.label_3.setText('Углеводы: ' + str(round(float(PRODUCTS_DICT[choose][2]) * g, 2)))
+        self.label_4.setText('Ккал: ' + str(round(float(PRODUCTS_DICT[choose][3]) * g, 2)))
         self.pushOkResult.clicked.connect(self.hide)
 
 
@@ -226,6 +247,9 @@ def back_to_main(self):  # Back to main window button
     prog.mainWin.show()  # Запуск окна старта
     self.hide()
 
+
+pyqtgraph.setConfigOption('background', QColor(244, 244, 244))
+pyqtgraph.setConfigOption('foreground', QColor(0, 0, 0))
 
 PRODUCTS_DICT = connect()
 app = QApplication(sys.argv)
