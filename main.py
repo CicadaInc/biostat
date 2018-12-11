@@ -14,14 +14,14 @@ import pyqtgraph
 
 
 # Main class
-class BioStat(QMainWindow):
+class BioStat():
     def __init__(self):
-        super().__init__()
         self.mainWin = MainMenu()
         self.startWin = StartWindow()
         self.statisticWin = StatisticWindow()
         self.progInfo = ProgramInformation()
         self.dialogWin = DialogCount()
+        self.adviceWin = AdviceWindow()
         self.resultWin = Result()
 
 
@@ -45,6 +45,7 @@ class MainMenu(QMainWindow):
         self.pushStatistic.clicked.connect(self.show_statistic)
         self.pushAbout.clicked.connect(self.show_program_info)
         self.pushClean.clicked.connect(self.clean_progress)
+        self.pushAdvices.clicked.connect(self.show_advices)
 
     def starting(self):
         global prog
@@ -64,10 +65,22 @@ class MainMenu(QMainWindow):
         prog.progInfo.show()
         self.hide()
 
+    def show_advices(self):
+        global prog
+
+        prog.progInfo.show()
+        self.hide()
+
     def clean_progress(self):
         HISTORY.clear()
         with open('DATABASE.txt', 'w') as db:
             db.write('')
+
+
+class AdviceWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi("statistic.ui")
 
 
 # Window start
