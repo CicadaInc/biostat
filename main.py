@@ -14,14 +14,14 @@ import pyqtgraph
 
 
 # Main class
-class BioStat(QMainWindow):
+class BioStat():
     def __init__(self):
-        super().__init__()
         self.mainWin = MainMenu()
         self.startWin = StartWindow()
         self.statisticWin = StatisticWindow()
         self.progInfo = ProgramInformation()
         self.dialogWin = DialogCount()
+        self.adviceWin = AdviceWindow()
         self.resultWin = Result()
 
 
@@ -45,6 +45,7 @@ class MainMenu(QMainWindow):
         self.pushStatistic.clicked.connect(self.show_statistic)
         self.pushAbout.clicked.connect(self.show_program_info)
         self.pushClean.clicked.connect(self.clean_progress)
+        self.pushAdvices.clicked.connect(self.show_advices)
 
     def starting(self):
         global prog
@@ -64,10 +65,22 @@ class MainMenu(QMainWindow):
         prog.progInfo.show()
         self.hide()
 
+    def show_advices(self):
+        global prog
+
+        prog.progInfo.show()
+        self.hide()
+
     def clean_progress(self):
         HISTORY.clear()
         with open('DATABASE.txt', 'w') as db:
             db.write('')
+
+
+class AdviceWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi("statistic.ui")
 
 
 # Window start
@@ -178,7 +191,8 @@ class StatisticWindow(QMainWindow):
         stat = {}
         with open('DATABASE.txt') as file:
             for line in file.readlines():
-                date, value = line[4: line.find(':') - 1].replace('-', '.'), eval(line[line.find(':') + 2: -2])
+                date, value = line[4: line.find(':') - 1].replace('-', '.'), eval(
+                    line[line.find(':') + 2: -2])
                 if date not in stat:
                     stat[date] = value
                 else:
@@ -243,6 +257,7 @@ class Result(QMainWindow):
         self.label_4.setText('Ккал: ' + str(calories))
         date = str(datetime.datetime.now())[:10]
         if date not in HISTORY:
+            HISTORY.clear()
             HISTORY[date] = [fats, proteins, carbohydrates, calories]
         else:
             HISTORY[date][0] += fats
@@ -252,10 +267,6 @@ class Result(QMainWindow):
         with open('DATABASE.txt', 'a') as db:
             db.write(str(HISTORY) + '\n')
         print(HISTORY)
-        try:
-            send_email()
-        except Exception:
-            print('Failed to send data to email')
         self.pushOkResult.clicked.connect(self.hide)
 
 
@@ -313,7 +324,7 @@ def send_email():
 
     # Формируем тело письма
     subject = 'We have a new informations'
-    body = str(HISTORY)
+    body = HISTORY
     msg = MIMEText(body, 'plain', 'utf-8')
     msg['Subject'] = Header(subject, 'utf-8')
 
