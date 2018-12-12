@@ -63,7 +63,7 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
     <property name="geometry">
      <rect>
       <x>680</x>
-      <y>140</y>
+      <y>160</y>
       <width>111</width>
       <height>31</height>
      </rect>
@@ -87,7 +87,7 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
     <property name="geometry">
      <rect>
       <x>680</x>
-      <y>30</y>
+      <y>50</y>
       <width>111</width>
       <height>26</height>
      </rect>
@@ -134,8 +134,8 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>110</y>
-      <width>211</width>
+      <y>100</y>
+      <width>181</width>
       <height>261</height>
      </rect>
     </property>

@@ -31,22 +31,56 @@ class MainMenu(QMainWindow):
         self.pushStart.clicked.connect(lambda: show_window(self, startWin))
         self.pushStatistic.clicked.connect(lambda: show_window(self, statisticWin))
         self.pushAbout.clicked.connect(lambda: show_window(self, progInfo))
-        self.pushAdvices.clicked.connect(lambda: show_window(self, progInfo))
+        self.pushAdvices.clicked.connect(lambda: show_window(self, adviceWin))
         self.pushClean.clicked.connect(self.clean_progress)
 
     def clean_progress(self):
+        global statisticWin, startWin, mainWin
+        global dialogWin, dialogWin2, adviceWin
+
         HISTORY.clear()
+
         with open('DATABASE.txt', 'w') as db:
             db.write('')
+        with open('user_data.txt', 'w') as db:
+            db.write('')
+
+        startWin = StartWindow()
+        statisticWin = StatisticWindow()
+        dialogWin2 = StartQuestions()
+        adviceWin = AdviceWindow()
+
+        mainWin.hide()
 
 
 class AdviceWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.setFixedSize(800, 500)
         self.init_UI()
 
     def init_UI(self):
+        set_background(self)
+
         uic.loadUi("advices.ui", self)
+
+        self.pushBackFromAdvices.clicked.connect(lambda: show_window(self, mainWin))
+
+        with open("DATABASE.txt") as file:
+            data, days = [0, 0, 0, 0], 0
+            for line in file.readlines():
+                value = eval(line[line.find(':') + 2: -2])
+                data = [data[i] + value[i] for i in range(4)]
+                days += 1
+
+        try:
+            data = list(map(lambda el: round(el / days, 2), data))
+        except ZeroDivisionError:
+            pass
+        self.proteins.setText(str(data[0]) + ' г белков')
+        self.fats.setText(str(data[1]) + ' г жиров')
+        self.carbohydrates.setText(str(data[2]) + ' г углеводов')
+        self.Kkal.setText(str(data[3]) + ' Ккал')
 
 
 class StartQuestions(QMainWindow):
@@ -128,7 +162,7 @@ class StartWindow(QMainWindow):
             eval('self.pushProduct_' + str(i) + '.hide()')
 
     def add_count(self, btn):
-        global prog, choose
+        global choose
 
         choose = btn.text()
         show_window(None, dialogWin)  # Запуск окна старта
@@ -149,6 +183,11 @@ class StatisticWindow(QMainWindow):
 
         self.pushBuild.clicked.connect(lambda: self.edit_graphic(self.chooseBox.currentText()))
 
+        self.zero_plot = pyqtgraph.PlotWidget(self)
+        self.zero_plot.move(380, 50)
+        self.zero_plot.resize(300, 330)
+        self.zero_plot.show()
+
         with open("DATABASE.txt") as file:
             data, days = [0, 0, 0, 0], 0
             for line in file.readlines():
@@ -156,7 +195,10 @@ class StatisticWindow(QMainWindow):
                 data = [data[i] + value[i] for i in range(4)]
                 days += 1
 
-        data = list(map(lambda el: round(el / days, 2), data))
+        try:
+            data = list(map(lambda el: round(el / days, 2), data))
+        except ZeroDivisionError:
+            pass
         self.proteins.setText(str(data[0]) + ' г белков')
         self.fats.setText(str(data[1]) + ' г жиров')
         self.carbohydrates.setText(str(data[2]) + ' г углеводов')
@@ -164,9 +206,8 @@ class StatisticWindow(QMainWindow):
 
     def edit_graphic(self, choose):
         stat = self.get_days_stat()
-        # stat = {'12.06.18': [50, 70, 100, 90], '13.07.18': [60, 150, 10, 20]}
+        print(stat)
         step = len(stat) // 6 + 1
-        print(list(stat.keys()))
 
         if choose == 'Белки':
             x, y = dict(enumerate([list(stat.keys())[i] for i in range(0, len(stat), step)])), \
@@ -183,12 +224,14 @@ class StatisticWindow(QMainWindow):
 
         stringaxis = pyqtgraph.AxisItem(orientation='bottom')
         stringaxis.setTicks([x.items()])
-        plot = pyqtgraph.PlotWidget(self, axisItems={'bottom': stringaxis})
-        plot.plot(list(x.keys()), y, pen='b')
+        self.plot = pyqtgraph.PlotWidget(self, axisItems={'bottom': stringaxis})
+        self.plot.plot(list(x.keys()), y, pen='b')
 
-        plot.move(380, 20)
-        plot.resize(300, 350)
-        plot.show()
+        self.zero_plot.hide()
+
+        self.plot.move(380, 50)
+        self.plot.resize(300, 330)
+        self.plot.show()
 
     def get_days_stat(self):
         stat = {}
@@ -269,6 +312,7 @@ class Result(QMainWindow):
         with open('DATABASE.txt', 'a') as db:
             db.write(str(HISTORY) + '\n')
         print(HISTORY)
+        send_email()
         self.pushOkResult.clicked.connect(self.hide)
 
 
@@ -313,6 +357,28 @@ def show_window(old, new):
     new.show()
     if not (old is None):
         old.hide()
+
+
+def send_email():
+    # Настройки
+    mail_sender = 'biostat18@mail.ru'
+    mail_receiver = 'biostat18@mail.ru'
+    username = 'biostat18@mail.ru'
+    password = 'qwerty3301'
+    server = smtplib.SMTP('smtp.mail.ru:587')
+
+    # Формируем тело письма
+    subject = 'We have a new informations'
+    body = str(HISTORY)
+    msg = MIMEText(body, 'plain', 'utf-8')
+    msg['Subject'] = Header(subject, 'utf-8')
+
+    # Отпавляем письмо
+    server.starttls()
+    server.ehlo()
+    server.login(username, password)
+    server.sendmail(mail_sender, mail_receiver, msg.as_string())
+    server.quit()
 
 
 pyqtgraph.setConfigOption('background', QColor(244, 244, 244))
