@@ -13,25 +13,12 @@ from email.header import Header
 import pyqtgraph
 
 
-# Main class
-class BioStat():
-    def __init__(self):
-        self.mainWin = MainMenu()
-        self.startWin = StartWindow()
-        self.statisticWin = StatisticWindow()
-        self.progInfo = ProgramInformation()
-        self.dialogWin = DialogCount()
-        self.adviceWin = AdviceWindow()
-        self.resultWin = Result()
-
-
 # Main menu
 class MainMenu(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setFixedSize(800, 500)
         self.init_UI()
-        self.show()
 
     def init_UI(self):
         # Установка фона
@@ -41,35 +28,11 @@ class MainMenu(QMainWindow):
         uic.loadUi('main.ui', self)
 
         # Подкличение функционала к кнопкам
-        self.pushStart.clicked.connect(self.starting)
-        self.pushStatistic.clicked.connect(self.show_statistic)
-        self.pushAbout.clicked.connect(self.show_program_info)
+        self.pushStart.clicked.connect(lambda: show_window(self, startWin))
+        self.pushStatistic.clicked.connect(lambda: show_window(self, statisticWin))
+        self.pushAbout.clicked.connect(lambda: show_window(self, progInfo))
+        self.pushAdvices.clicked.connect(lambda: show_window(self, progInfo))
         self.pushClean.clicked.connect(self.clean_progress)
-        self.pushAdvices.clicked.connect(self.show_advices)
-
-    def starting(self):
-        global prog
-
-        prog.startWin.show()  # Запуск окна старта
-        self.hide()
-
-    def show_statistic(self):
-        global prog
-
-        prog.statisticWin.show()  # Запуск окна статистики
-        self.hide()
-
-    def show_program_info(self):
-        global prog
-
-        prog.progInfo.show()
-        self.hide()
-
-    def show_advices(self):
-        global prog
-
-        prog.progInfo.show()
-        self.hide()
 
     def clean_progress(self):
         HISTORY.clear()
@@ -80,7 +43,34 @@ class MainMenu(QMainWindow):
 class AdviceWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("statistic.ui")
+        self.init_UI()
+
+    def init_UI(self):
+        uic.loadUi("advices.ui", self)
+
+
+class StartQuestions(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.init_UI()
+
+    def init_UI(self):
+        uic.loadUi("start_quests.ui", self)
+
+        self.pushOkQuests.clicked.connect(self.save_data)
+
+        with open("user_data.txt") as file:
+            if file.readlines():
+                show_window(self, mainWin)
+            else:
+                self.show()
+
+    def save_data(self):
+        with open("user_data.txt", mode='w', encoding='utf-8') as file:
+            file.write(self.ageInput.text() + '\n')
+            file.write(self.weightInput.text() + '\n')
+            file.write(self.genderChoice.currentText() + '\n')
+        show_window(self, mainWin)
 
 
 # Window start
@@ -105,7 +95,7 @@ class StartWindow(QMainWindow):
 
         self.hide_products()
 
-        self.pushBackFromStart.clicked.connect(lambda: back_to_main(self))
+        self.pushBackFromStart.clicked.connect(lambda: show_window(self, mainWin))
         self.pushOkSearch.clicked.connect(self.searching)
         self.buttonGroup.buttonClicked.connect(self.add_count)
 
@@ -141,7 +131,7 @@ class StartWindow(QMainWindow):
         global prog, choose
 
         choose = btn.text()
-        prog.dialogWin.show()  # Запуск окна старта
+        show_window(None, dialogWin)  # Запуск окна старта
 
 
 class StatisticWindow(QMainWindow):
@@ -155,36 +145,49 @@ class StatisticWindow(QMainWindow):
 
         uic.loadUi('statistic.ui', self)
 
-        self.pushBackFromStatistic.clicked.connect(lambda: back_to_main(self))
-
-        self.chooseBox.addItem('Белки')
-        self.chooseBox.addItem('Жиры')
-        self.chooseBox.addItem('Углеводы')
-        self.chooseBox.addItem('Ккал')
+        self.pushBackFromStatistic.clicked.connect(lambda: show_window(self, mainWin))
 
         self.pushBuild.clicked.connect(lambda: self.edit_graphic(self.chooseBox.currentText()))
+
+        with open("DATABASE.txt") as file:
+            data, days = [0, 0, 0, 0], 0
+            for line in file.readlines():
+                value = eval(line[line.find(':') + 2: -2])
+                data = [data[i] + value[i] for i in range(4)]
+                days += 1
+
+        data = list(map(lambda el: round(el / days, 2), data))
+        self.proteins.setText(str(data[0]) + ' г белков')
+        self.fats.setText(str(data[1]) + ' г жиров')
+        self.carbohydrates.setText(str(data[2]) + ' г углеводов')
+        self.Kkal.setText(str(data[3]) + ' Ккал')
 
     def edit_graphic(self, choose):
         stat = self.get_days_stat()
         # stat = {'12.06.18': [50, 70, 100, 90], '13.07.18': [60, 150, 10, 20]}
-        print(stat)
+        step = len(stat) // 6 + 1
+        print(list(stat.keys()))
 
         if choose == 'Белки':
-            x, y = dict(enumerate([date for date in stat])), [stat[date][0] for date in stat]
+            x, y = dict(enumerate([list(stat.keys())[i] for i in range(0, len(stat), step)])), \
+                   [stat[list(stat.keys())[i]][0] for i in range(0, len(stat), step)]
         elif choose == 'Жиры':
-            x, y = dict(enumerate([date for date in stat])), [stat[date][1] for date in stat]
+            x, y = dict(enumerate([list(stat.keys())[i] for i in range(0, len(stat), step)])), \
+                   [stat[list(stat.keys())[i]][1] for i in range(0, len(stat), step)]
         elif choose == 'Углеводы':
-            x, y = dict(enumerate([date for date in stat])), [stat[date][2] for date in stat]
+            x, y = dict(enumerate([list(stat.keys())[i] for i in range(0, len(stat), step)])), \
+                   [stat[list(stat.keys())[i]][2] for i in range(0, len(stat), step)]
         else:
-            x, y = dict(enumerate([date for date in stat])), [stat[date][3] for date in stat]
+            x, y = dict(enumerate([list(stat.keys())[i] for i in range(0, len(stat), step)])), \
+                   [stat[list(stat.keys())[i]][3] for i in range(0, len(stat), step)]
 
         stringaxis = pyqtgraph.AxisItem(orientation='bottom')
         stringaxis.setTicks([x.items()])
         plot = pyqtgraph.PlotWidget(self, axisItems={'bottom': stringaxis})
         plot.plot(list(x.keys()), y, pen='b')
 
-        plot.move(330, 20)
-        plot.resize(441, 381)
+        plot.move(380, 20)
+        plot.resize(300, 350)
         plot.show()
 
     def get_days_stat(self):
@@ -212,7 +215,7 @@ class ProgramInformation(QMainWindow):
 
         uic.loadUi('program_info.ui', self)
 
-        self.pushBackFromInfo.clicked.connect(lambda: back_to_main(self))
+        self.pushBackFromInfo.clicked.connect(lambda: show_window(self, mainWin))
 
 
 class DialogCount(QMainWindow):
@@ -231,9 +234,8 @@ class DialogCount(QMainWindow):
 
     def run(self):
         g = float(self.spinBox.value()) / 100
-        self.hide()
-        prog.resultWin.initUI(g)
-        prog.resultWin.show()
+        resultWin.initUI(g)
+        show_window(self, resultWin)
 
 
 class Result(QMainWindow):
@@ -307,33 +309,10 @@ def set_background(self):  # Установка фона для окон
     self.bg.setPixmap(QPixmap("image.jpg").scaled(900, 600))
 
 
-def back_to_main(self):  # Back to main window button
-    global prog
-
-    prog.mainWin.show()  # Запуск окна старта
-    self.hide()
-
-
-def send_email():
-    # Настройки
-    mail_sender = 'biostat18@mail.ru'
-    mail_receiver = 'biostat18@mail.ru'
-    username = 'biostat18@mail.ru'
-    password = 'qwerty3301'
-    server = smtplib.SMTP('smtp.mail.ru:587')
-
-    # Формируем тело письма
-    subject = 'We have a new informations'
-    body = HISTORY
-    msg = MIMEText(body, 'plain', 'utf-8')
-    msg['Subject'] = Header(subject, 'utf-8')
-
-    # Отпавляем письмо
-    server.starttls()
-    server.ehlo()
-    server.login(username, password)
-    server.sendmail(mail_sender, mail_receiver, msg.as_string())
-    server.quit()
+def show_window(old, new):
+    new.show()
+    if not (old is None):
+        old.hide()
 
 
 pyqtgraph.setConfigOption('background', QColor(244, 244, 244))
@@ -342,5 +321,14 @@ pyqtgraph.setConfigOption('foreground', QColor(0, 0, 0))
 HISTORY = {}
 PRODUCTS_DICT = connect()
 app = QApplication(sys.argv)
-prog = BioStat()
+
+mainWin = MainMenu()
+startWin = StartWindow()
+statisticWin = StatisticWindow()
+progInfo = ProgramInformation()
+dialogWin = DialogCount()
+dialogWin2 = StartQuestions()
+adviceWin = AdviceWindow()
+resultWin = Result()
+
 sys.exit(app.exec_())

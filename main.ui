@@ -147,7 +147,7 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      <string>О ПРОГРАММЕ</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushRecommendations">
+   <widget class="QPushButton" name="pushAdvices">
     <property name="geometry">
      <rect>
       <x>570</x>
