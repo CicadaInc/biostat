@@ -312,7 +312,6 @@ class Result(QMainWindow):
         with open('DATABASE.txt', 'a') as db:
             db.write(str(HISTORY) + '\n')
         print(HISTORY)
-        send_email()
         self.pushOkResult.clicked.connect(self.hide)
 
 
@@ -357,28 +356,6 @@ def show_window(old, new):
     new.show()
     if not (old is None):
         old.hide()
-
-
-def send_email():
-    # Настройки
-    mail_sender = 'biostat18@mail.ru'
-    mail_receiver = 'biostat18@mail.ru'
-    username = 'biostat18@mail.ru'
-    password = 'qwerty3301'
-    server = smtplib.SMTP('smtp.mail.ru:587')
-
-    # Формируем тело письма
-    subject = 'We have a new informations'
-    body = str(HISTORY)
-    msg = MIMEText(body, 'plain', 'utf-8')
-    msg['Subject'] = Header(subject, 'utf-8')
-
-    # Отпавляем письмо
-    server.starttls()
-    server.ehlo()
-    server.login(username, password)
-    server.sendmail(mail_sender, mail_receiver, msg.as_string())
-    server.quit()
 
 
 pyqtgraph.setConfigOption('background', QColor(244, 244, 244))
