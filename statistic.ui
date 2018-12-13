@@ -148,7 +148,7 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
         </font>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -163,7 +163,7 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
         </font>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -178,7 +178,7 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
         </font>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -193,7 +193,7 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
         </font>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
