@@ -30,6 +30,7 @@ class MainMenu(QMainWindow):
         self.pushAbout.clicked.connect(lambda: show_window(self, progInfo))
         self.pushAdvices.clicked.connect(lambda: show_window(self, adviceWin))
         self.pushClean.clicked.connect(self.clean_progress)
+        self.pushExit.clicked.connect(self.close)
 
     def clean_progress(self):
         global statisticWin, startWin, mainWin
@@ -153,7 +154,6 @@ class AdviceWindow(QMainWindow):
         self.fats_2.show()
         self.carbohydrates_2.show()
         self.Kkal_2.show()
-        self.label.hide()
 
     def get_advice(self, consume, normal):
         if abs(consume[0] - normal[0]) > 100:
@@ -186,11 +186,11 @@ class AdviceWindow(QMainWindow):
             if consume[2] - normal[2] < -100:
                 self.carbohydrate_advice.setText('Нужно увеличить кол-во потребляемых углеводов')
                 self.ch_diseasesDisInf = 'Приводит к сухости, дряблости,\n шелушению кожи,\n слабсоти, обезвоживанию,\n' \
-                                          'ухудшению зрения,\n концентрации, памяти и\n сердечно-сосудистой системы'
+                                         'ухудшению зрения,\n концентрации, памяти и\n сердечно-сосудистой системы'
             elif consume[2] - normal[2] > 100:
                 self.carbohydrate_advice.setText('Нужно уменьшить кол-во потребляемых жиров')
                 self.ch_diseasesDisInf = 'Приводит к ожирению,\n создает доп. нагрузку на почки,\n' \
-                                          ' способствует выщелачиванию\n минералов из костной ткани'
+                                         ' способствует выщелачиванию\n минералов из костной ткани'
             self.pushCarbohydrateDiseases.show()
         else:
             self.carbohydrate_advice.setText('Кол-во потребляемых углеводов в порядке')
@@ -199,11 +199,11 @@ class AdviceWindow(QMainWindow):
             if consume[3] - normal[3] < -100:
                 self.Kkal_advice.setText('Нужно увеличить кол-во потребляемых калорий')
                 self.Kkal_diseasesDisInf = 'Приводит к сухости, дряблости,\n шелушению кожи,\n слабсоти, обезвоживанию,\n' \
-                                          'ухудшению зрения,\n концентрации, памяти и\n сердечно-сосудистой системы'
+                                           'ухудшению зрения,\n концентрации, памяти и\n сердечно-сосудистой системы'
             elif consume[3] - normal[3] > 100:
                 self.Kkal_advice.setText('Нужно уменьшить кол-во потребляемых калорий')
                 self.Kkal_diseasesDisInf = 'Приводит к ожирению,\n создает доп. нагрузку на почки,\n' \
-                                          ' способствует выщелачиванию\n минералов из костной ткани'
+                                           ' способствует выщелачиванию\n минералов из костной ткани'
             self.pushKkalDiseases.show()
         else:
             self.Kkal_advice.setText('Кол-во потребляемых калорий в порядке')
