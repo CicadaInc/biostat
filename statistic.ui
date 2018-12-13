@@ -62,26 +62,17 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
    <widget class="QPushButton" name="pushBuild">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>140</y>
-      <width>91</width>
+      <x>680</x>
+      <y>160</y>
+      <width>111</width>
       <height>31</height>
      </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>verdana</family>
-      <pointsize>12</pointsize>
-      <weight>50</weight>
-      <italic>false</italic>
-      <bold>false</bold>
-     </font>
     </property>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {font: 12pt &quot;verdana&quot;; 
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
 background-color: rgb(255, 255, 255); 
 border-radius: 2px; 
 border: 2px solid #9a9; 
@@ -95,9 +86,9 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
    <widget class="QComboBox" name="chooseBox">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>30</y>
-      <width>91</width>
+      <x>680</x>
+      <y>50</y>
+      <width>111</width>
       <height>26</height>
      </rect>
     </property>
@@ -142,9 +133,9 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>120</y>
-      <width>211</width>
+      <x>190</x>
+      <y>100</y>
+      <width>181</width>
       <height>261</height>
      </rect>
     </property>
@@ -160,7 +151,7 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
         <string>TextLabel</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
@@ -175,7 +166,7 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
         <string>TextLabel</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
@@ -190,7 +181,7 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
         <string>TextLabel</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
@@ -205,7 +196,7 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
         <string>TextLabel</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
@@ -214,9 +205,9 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>10</y>
-      <width>209</width>
+      <x>160</x>
+      <y>30</y>
+      <width>211</width>
       <height>83</height>
      </rect>
     </property>
@@ -232,27 +223,31 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>430</y>
-      <width>321</width>
-      <height>20</height>
+      <x>180</x>
+      <y>60</y>
+      <width>195</width>
+      <height>301</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>*Данные усреднены и указаны за последнюю неделю</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
+    <property name="styleSheet">
+     <string notr="true">font: 13pt &quot;verdana&quot;; 
+background-color: rgb(255, 255, 255); 
+border-radius: 2px; 
+border: 2px solid #9a9; 
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;</string>
     </property>
    </widget>
+   <zorder>widget</zorder>
+   <zorder>pushBackFromStatistic</zorder>
+   <zorder>version</zorder>
+   <zorder>pushBuild</zorder>
+   <zorder>chooseBox</zorder>
+   <zorder>verticalLayoutWidget</zorder>
+   <zorder>label_2</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

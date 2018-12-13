@@ -4,12 +4,9 @@ import re
 import string
 import datetime
 from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
+from PyQt5.QtWidgets import QMainWindow, QLabel
 from PyQt5.QtGui import QPixmap, QIcon, QColor
 from PyQt5.QtWidgets import QApplication
-import smtplib
-from email.mime.text import MIMEText
-from email.header import Header
 import pyqtgraph
 
 
@@ -184,8 +181,8 @@ class StatisticWindow(QMainWindow):
         self.pushBuild.clicked.connect(lambda: self.edit_graphic(self.chooseBox.currentText()))
 
         self.zero_plot = pyqtgraph.PlotWidget(self)
-        self.zero_plot.move(380, 20)
-        self.zero_plot.resize(320, 350)
+        self.zero_plot.move(380, 50)
+        self.zero_plot.resize(300, 330)
         self.zero_plot.show()
 
         with open("DATABASE.txt") as file:
@@ -204,14 +201,13 @@ class StatisticWindow(QMainWindow):
         self.carbohydrates.setText(str(data[2]) + ' г углеводов')
         self.Kkal.setText(str(data[3]) + ' Ккал')
 
-
     def edit_graphic(self, choose):
         stat = self.get_days_stat()
         print(stat)
         step = len(stat) // 6 + 1
 
         if choose == 'Белки':
-            x, y = dict(enumerate([list(stat.keys())[i] for i in range(0, len(stat), step)])),\
+            x, y = dict(enumerate([list(stat.keys())[i] for i in range(0, len(stat), step)])), \
                    [stat[list(stat.keys())[i]][0] for i in range(0, len(stat), step)]
         elif choose == 'Жиры':
             x, y = dict(enumerate([list(stat.keys())[i] for i in range(0, len(stat), step)])), \
@@ -230,8 +226,8 @@ class StatisticWindow(QMainWindow):
 
         self.zero_plot.hide()
 
-        self.plot.move(380, 20)
-        self.plot.resize(320, 350)
+        self.plot.move(380, 50)
+        self.plot.resize(300, 330)
         self.plot.show()
 
     def get_days_stat(self):
@@ -313,7 +309,6 @@ class Result(QMainWindow):
         with open('DATABASE.txt', 'a') as db:
             db.write(str(HISTORY) + '\n')
         print(HISTORY)
-        send_email()
         self.pushOkResult.clicked.connect(self.hide)
 
 
@@ -358,28 +353,6 @@ def show_window(old, new):
     new.show()
     if not (old is None):
         old.hide()
-
-
-def send_email():
-    # Настройки
-    mail_sender = 'biostat18@mail.ru'
-    mail_receiver = 'biostat18@mail.ru'
-    username = 'biostat18@mail.ru'
-    password = 'qwerty3301'
-    server = smtplib.SMTP('smtp.mail.ru:587')
-
-    # Формируем тело письма
-    subject = 'We have a new informations'
-    body = str(HISTORY)
-    msg = MIMEText(body, 'plain', 'utf-8')
-    msg['Subject'] = Header(subject, 'utf-8')
-
-    # Отпавляем письмо
-    server.starttls()
-    server.ehlo()
-    server.login(username, password)
-    server.sendmail(mail_sender, mail_receiver, msg.as_string())
-    server.quit()
 
 
 pyqtgraph.setConfigOption('background', QColor(244, 244, 244))
