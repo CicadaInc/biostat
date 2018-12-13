@@ -7,9 +7,6 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
 from PyQt5.QtGui import QPixmap, QIcon, QColor
 from PyQt5.QtWidgets import QApplication
-import smtplib
-from email.mime.text import MIMEText
-from email.header import Header
 import pyqtgraph
 
 
