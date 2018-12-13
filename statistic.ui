@@ -148,7 +148,7 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
         </font>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -163,7 +163,7 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
         </font>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -178,7 +178,7 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
         </font>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -193,7 +193,7 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
         </font>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -233,11 +233,11 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+     <string notr="true">font: 13pt &quot;verdana&quot;;
+background-color: rgb(255, 255, 255);
+border-radius: 2px;
+border: 2px solid #9a9;
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
 QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;</string>
     </property>
    </widget>
