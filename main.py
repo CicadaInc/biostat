@@ -53,6 +53,9 @@ class MainMenu(QMainWindow):
 class AdviceWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.proteinDisInf, self.fatDisInf, \
+        self.ch_diseasesDisInf, self.Kkal_diseasesDisInf = '', '', '', ''
+
         self.setFixedSize(800, 500)
         self.init_UI()
 
@@ -63,21 +66,158 @@ class AdviceWindow(QMainWindow):
 
         self.pushBackFromAdvices.clicked.connect(lambda: show_window(self, mainWin))
 
+        self.pushCalculate.clicked.connect(self.calculate_normal)
+
+        self.pushProteinDiseases.clicked.connect(
+            lambda: (diseasesWin.inf.setText(self.proteinDisInf),
+                     show_window(None, diseasesWin)))
+        self.pushFatDiseases.clicked.connect(
+            lambda: (diseasesWin.inf.setText(self.fatDisInf),
+                     show_window(None, diseasesWin)))
+        self.pushCarbohydrateDiseases.clicked.connect(
+            lambda: (diseasesWin.inf.setText(self.ch_diseasesDisInf),
+                     show_window(None, diseasesWin)))
+        self.pushKkalDiseases.clicked.connect(
+            lambda: (diseasesWin.inf.setText(self.Kkal_diseasesDisInf),
+                     show_window(None, diseasesWin)))
+
+        self.proteins_2.hide()
+        self.fats_2.hide()
+        self.carbohydrates_2.hide()
+        self.Kkal_2.hide()
+        self.pushProteinDiseases.hide()
+        self.pushFatDiseases.hide()
+        self.pushCarbohydrateDiseases.hide()
+        self.pushKkalDiseases.hide()
+
         with open("DATABASE.txt") as file:
-            data, days = [0, 0, 0, 0], 0
-            for line in file.readlines():
+            self.data, days = [0, 0, 0, 0], 0
+            for line in file.readlines()[-7:]:
                 value = eval(line[line.find(':') + 2: -2])
-                data = [data[i] + value[i] for i in range(4)]
+                self.data = [self.data[i] + value[i] for i in range(4)]
                 days += 1
 
         try:
-            data = list(map(lambda el: round(el / days, 2), data))
+            self.data = list(map(lambda el: round(el / days, 2), self.data))
         except ZeroDivisionError:
             pass
-        self.proteins.setText(str(data[0]) + ' г белков')
-        self.fats.setText(str(data[1]) + ' г жиров')
-        self.carbohydrates.setText(str(data[2]) + ' г углеводов')
-        self.Kkal.setText(str(data[3]) + ' Ккал')
+        self.proteins.setText(str(self.data[0]) + ' г белков')
+        self.fats.setText(str(self.data[1]) + ' г жиров')
+        self.carbohydrates.setText(str(self.data[2]) + ' г углеводов')
+        self.Kkal.setText(str(self.data[3]) + ' Ккал')
+
+    def calculate_normal(self):
+        with open("user_data.txt", encoding='utf-8') as file:
+            age, weight, height, gender = map(lambda el: el[:-1], file.readlines())
+            age, weight, height = int(age), int(weight), int(height)
+            choice = self.chooseActivity.currentText()
+
+        if gender == 'Мужчина':
+            wk, pk, hk, ak = 13.397, 88.362, 4.799, 5.677
+            p, f, ch = 3, 2, 5
+        else:
+            wk, pk, hk, ak = 9.247, 447.593, 3.098, 4.330
+            p, f, ch = 2.2, 2, 4.5
+
+        if choice == 'Сидячий образ жизни':
+            amr = 1.2
+        elif choice == 'Умеренная активность':
+            amr = 1.375
+        elif choice == 'Средняя активность':
+            amr = 1.55
+        elif choice == 'Интенсивные нагрузки':
+            amr = 1.725
+        elif choice == 'Для спортсменов':
+            amr = 1.9
+        elif choice == 'Для увеличения массы':
+            amr = 1.2
+        else:
+            amr = 0.8
+
+        bmr = pk + wk * weight + hk * height - ak * age
+        bmr *= amr
+
+        part = bmr / (p + f + ch)
+        p *= part
+        f *= part
+        ch *= part
+
+        self.proteins_2.setText(str(int(round(p, -1))) + ' г белков')
+        self.fats_2.setText(str(int(round(f, -1))) + ' г жиров')
+        self.carbohydrates_2.setText(str(int(round(ch, -1))) + ' г углеводов')
+        self.Kkal_2.setText(str(int(round(bmr, -1))) + ' Ккал')
+
+        self.get_advice(self.data, [p, f, ch, bmr])
+
+        self.proteins_2.show()
+        self.fats_2.show()
+        self.carbohydrates_2.show()
+        self.Kkal_2.show()
+        self.label.hide()
+
+    def get_advice(self, consume, normal):
+        if abs(consume[0] - normal[0]) > 100:
+            if consume[0] - normal[0] < -100:
+                self.protein_advice.setText('Нужно увеличить кол-во потребляемых белков')
+                self.proteinDisInf = 'Приводит к гипотонии,\n дистрофии мышц,\n снижению тургора тканей,\n' \
+                                     'проблемам с сердцем,\n печенью, памятью,\n гормонами и иммунитетом'
+            elif consume[0] - normal[0] > 100:
+                self.protein_advice.setText('Нужно уменьшить кол-во потребляемых белков')
+                self.proteinDisInf = 'Приводит к ожирению,\n создает доп. нагрузку на почки,\n' \
+                                     ' способствует выщелачиванию\n минералов из костной ткани'
+            self.pushProteinDiseases.show()
+        else:
+            self.protein_advice.setText('Кол-во потребляемых белков в порядке')
+
+        if abs(consume[1] - normal[1]) > 100:
+            if consume[1] - normal[1] < -100:
+                self.fat_advice.setText('Нужно увеличить кол-во потребляемых жиров')
+                self.fatDisInf = 'Приводит к сухости, дряблости,\n шелушению кожи,\n слабсоти, обезвоживанию,\n' \
+                                 'ухудшению зрения,\n концентрации, памяти и\n сердечно-сосудистой системы'
+            elif consume[1] - normal[1] > 100:
+                self.fat_advice.setText('Нужно уменьшить кол-во потребляемых жиров')
+                self.fatDisInf = 'Приводит к ожирению,\n создает доп. нагрузку на почки,\n' \
+                                 ' способствует выщелачиванию\n минералов из костной ткани'
+            self.pushFatDiseases.show()
+        else:
+            self.fat_advice.setText('Кол-во потребляемых жиров в порядке')
+
+        if abs(consume[2] - normal[2]) > 100:
+            if consume[2] - normal[2] < -100:
+                self.carbohydrate_advice.setText('Нужно увеличить кол-во потребляемых углеводов')
+                self.ch_diseasesDisInf = 'Приводит к сухости, дряблости,\n шелушению кожи,\n слабсоти, обезвоживанию,\n' \
+                                          'ухудшению зрения,\n концентрации, памяти и\n сердечно-сосудистой системы'
+            elif consume[2] - normal[2] > 100:
+                self.carbohydrate_advice.setText('Нужно уменьшить кол-во потребляемых жиров')
+                self.ch_diseasesDisInf = 'Приводит к ожирению,\n создает доп. нагрузку на почки,\n' \
+                                          ' способствует выщелачиванию\n минералов из костной ткани'
+            self.pushCarbohydrateDiseases.show()
+        else:
+            self.carbohydrate_advice.setText('Кол-во потребляемых углеводов в порядке')
+
+        if abs(consume[3] - normal[3]) > 100:
+            if consume[3] - normal[3] < -100:
+                self.Kkal_advice.setText('Нужно увеличить кол-во потребляемых калорий')
+                self.Kkal_diseasesDisInf = 'Приводит к сухости, дряблости,\n шелушению кожи,\n слабсоти, обезвоживанию,\n' \
+                                          'ухудшению зрения,\n концентрации, памяти и\n сердечно-сосудистой системы'
+            elif consume[3] - normal[3] > 100:
+                self.Kkal_advice.setText('Нужно уменьшить кол-во потребляемых калорий')
+                self.Kkal_diseasesDisInf = 'Приводит к ожирению,\n создает доп. нагрузку на почки,\n' \
+                                          ' способствует выщелачиванию\n минералов из костной ткани'
+            self.pushKkalDiseases.show()
+        else:
+            self.Kkal_advice.setText('Кол-во потребляемых калорий в порядке')
+
+
+class Diseases(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.init_UI()
+
+    def init_UI(self):
+        uic.loadUi("diseases.ui", self)
+
+        self.pushOkDiseases.clicked.connect(lambda: show_window(self, None))
 
 
 class StartQuestions(QMainWindow):
@@ -100,6 +240,7 @@ class StartQuestions(QMainWindow):
         with open("user_data.txt", mode='w', encoding='utf-8') as file:
             file.write(self.ageInput.text() + '\n')
             file.write(self.weightInput.text() + '\n')
+            file.write(self.heightInput.text() + '\n')
             file.write(self.genderChoice.currentText() + '\n')
         show_window(self, mainWin)
 
@@ -187,7 +328,7 @@ class StatisticWindow(QMainWindow):
 
         with open("DATABASE.txt") as file:
             data, days = [0, 0, 0, 0], 0
-            for line in file.readlines():
+            for line in file.readlines()[-7:]:
                 value = eval(line[line.find(':') + 2: -2])
                 data = [data[i] + value[i] for i in range(4)]
                 days += 1
@@ -350,7 +491,8 @@ def set_background(self):  # Установка фона для окон
 
 
 def show_window(old, new):
-    new.show()
+    if not (new is None):
+        new.show()
     if not (old is None):
         old.hide()
 
@@ -368,6 +510,7 @@ statisticWin = StatisticWindow()
 progInfo = ProgramInformation()
 dialogWin = DialogCount()
 dialogWin2 = StartQuestions()
+diseasesWin = Diseases()
 adviceWin = AdviceWindow()
 resultWin = Result()
 
