@@ -78,11 +78,11 @@ p, li { white-space: pre-wrap; }
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;;
+background-color: rgb(255, 255, 255);
+border-radius: 2px;
+border: 2px solid #9a9;
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
 QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
     <property name="text">
@@ -102,11 +102,11 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;;
+background-color: rgb(255, 255, 255);
+border-radius: 2px;
+border: 2px solid #9a9;
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
 QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
     <property name="text">
@@ -126,11 +126,11 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;;
+background-color: rgb(255, 255, 255);
+border-radius: 2px;
+border: 2px solid #9a9;
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
 QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
     <property name="text">
@@ -153,11 +153,11 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;;
+background-color: rgb(255, 255, 255);
+border-radius: 2px;
+border: 2px solid #9a9;
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
 QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
     <property name="text">
@@ -180,11 +180,11 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;;
+background-color: rgb(255, 255, 255);
+border-radius: 2px;
+border: 2px solid #9a9;
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
 QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
     <property name="text">
@@ -207,11 +207,11 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;;
+background-color: rgb(255, 255, 255);
+border-radius: 2px;
+border: 2px solid #9a9;
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
 QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
     <property name="text">
@@ -234,11 +234,11 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;;
+background-color: rgb(255, 255, 255);
+border-radius: 2px;
+border: 2px solid #9a9;
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
 QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
     <property name="text">
@@ -261,11 +261,11 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;;
+background-color: rgb(255, 255, 255);
+border-radius: 2px;
+border: 2px solid #9a9;
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
 QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
     <property name="text">
@@ -304,11 +304,11 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;; 
-background-color: rgb(255, 255, 255); 
-border-radius: 2px; 
-border: 2px solid #9a9; 
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)} 
+     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;;
+background-color: rgb(255, 255, 255);
+border-radius: 2px;
+border: 2px solid #9a9;
+box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
 QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
     </property>
     <property name="text">
@@ -317,6 +317,25 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
     <attribute name="buttonGroup">
      <string notr="true">buttonGroup</string>
     </attribute>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>20</y>
+      <width>501</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 13pt &quot;Verdana&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Введите название продукта:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

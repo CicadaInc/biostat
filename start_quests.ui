@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>BioStat</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
@@ -79,9 +79,9 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
    <widget class="QPushButton" name="pushOkQuests">
     <property name="geometry">
      <rect>
-      <x>80</x>
+      <x>20</x>
       <y>270</y>
-      <width>351</width>
+      <width>461</width>
       <height>41</height>
      </rect>
     </property>
@@ -123,9 +123,9 @@ box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)</string>
    <widget class="QComboBox" name="genderChoice">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>20</x>
       <y>170</y>
-      <width>141</width>
+      <width>221</width>
       <height>41</height>
      </rect>
     </property>
