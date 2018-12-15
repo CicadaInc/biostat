@@ -26,9 +26,11 @@ class MainMenu(QMainWindow):
 
         # Подкличение функционала к кнопкам
         self.pushStart.clicked.connect(lambda: show_window(self, startWin))
-        self.pushStatistic.clicked.connect(lambda: show_window(self, statisticWin))
+        self.pushStatistic.clicked.connect(
+            lambda: (show_window(self, statisticWin), statisticWin.set_pfc_information()))
         self.pushAbout.clicked.connect(lambda: show_window(self, progInfo))
-        self.pushAdvices.clicked.connect(lambda: show_window(self, adviceWin))
+        self.pushAdvices.clicked.connect(
+            lambda: (show_window(self, adviceWin), adviceWin.set_pfc_inforamtion()))
         self.pushClean.clicked.connect(self.clean_progress)
         self.pushExit.clicked.connect(self.close)
 
@@ -91,6 +93,7 @@ class AdviceWindow(QMainWindow):
         self.pushCarbohydrateDiseases.hide()
         self.pushKkalDiseases.hide()
 
+    def set_pfc_inforamtion(self):
         with open("DATABASE.txt") as file:
             self.data, days = [0, 0, 0, 0], 0
             for line in file.readlines()[-7:]:
@@ -344,6 +347,7 @@ class StatisticWindow(QMainWindow):
         self.zero_plot.resize(300, 330)
         self.zero_plot.show()
 
+    def set_pfc_information(self):
         with open("DATABASE.txt") as file:
             data, days = [0, 0, 0, 0], 0
             for line in file.readlines()[-7:]:
