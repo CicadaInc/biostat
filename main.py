@@ -26,9 +26,11 @@ class MainMenu(QMainWindow):
 
         # Подкличение функционала к кнопкам
         self.pushStart.clicked.connect(lambda: show_window(self, startWin))
-        self.pushStatistic.clicked.connect(lambda: show_window(self, statisticWin))
+        self.pushStatistic.clicked.connect(
+            lambda: (show_window(self, statisticWin), statisticWin.set_pfc_information()))
         self.pushAbout.clicked.connect(lambda: show_window(self, progInfo))
-        self.pushAdvices.clicked.connect(lambda: show_window(self, adviceWin))
+        self.pushAdvices.clicked.connect(
+            lambda: (show_window(self, adviceWin), adviceWin.set_pfc_inforamtion()))
         self.pushClean.clicked.connect(self.clean_progress)
         self.pushExit.clicked.connect(self.close)
 
@@ -91,6 +93,7 @@ class AdviceWindow(QMainWindow):
         self.pushCarbohydrateDiseases.hide()
         self.pushKkalDiseases.hide()
 
+    def set_pfc_inforamtion(self):
         with open("DATABASE.txt") as file:
             self.data, days = [0, 0, 0, 0], 0
             for line in file.readlines()[-7:]:
@@ -159,12 +162,18 @@ class AdviceWindow(QMainWindow):
         if abs(consume[0] - normal[0]) > 100:
             if consume[0] - normal[0] < -100:
                 self.protein_advice.setText('Нужно увеличить кол-во потребляемых белков')
-                self.proteinDisInf = 'Приводит к гипотонии,\n дистрофии мышц,\n снижению тургора тканей,\n' \
-                                     'проблемам с сердцем,\n печенью, памятью,\n гормонами и иммунитетом'
+                self.proteinDisInf = 'Приводит к гипотонии,\n' \
+                                     'дистрофии мышц,\n' \
+                                     'снижению тургора тканей,\n' \
+                                     'проблемам с сердцем,\n' \
+                                     'печенью, памятью,\n' \
+                                     'гормонами и иммунитетом'
             elif consume[0] - normal[0] > 100:
                 self.protein_advice.setText('Нужно уменьшить кол-во потребляемых белков')
-                self.proteinDisInf = 'Приводит к ожирению,\n создает доп. нагрузку на почки,\n' \
-                                     ' способствует выщелачиванию\n минералов из костной ткани'
+                self.proteinDisInf = 'Приводит к ожирению,\n' \
+                                     'создает доп. нагрузку на почки,\n' \
+                                     'способствует выщелачиванию\n' \
+                                     'минералов из костной ткани'
             self.pushProteinDiseases.show()
         else:
             self.protein_advice.setText('Кол-во потребляемых белков в порядке')
@@ -172,12 +181,17 @@ class AdviceWindow(QMainWindow):
         if abs(consume[1] - normal[1]) > 100:
             if consume[1] - normal[1] < -100:
                 self.fat_advice.setText('Нужно увеличить кол-во потребляемых жиров')
-                self.fatDisInf = 'Приводит к сухости, дряблости,\n шелушению кожи,\n слабсоти, обезвоживанию,\n' \
-                                 'ухудшению зрения,\n концентрации, памяти и\n сердечно-сосудистой системы'
+                self.fatDisInf = 'Приводит к сухости кожи,\n слабости, обезвоживанию,\n' \
+                                 'депрессии\n' \
+                                 'Ощущению голода и холода\n' \
+                                 'ухудшению зрения,\n концентрации, памяти и\n' \
+                                 'сердечно-сосудистой системы'
             elif consume[1] - normal[1] > 100:
                 self.fat_advice.setText('Нужно уменьшить кол-во потребляемых жиров')
-                self.fatDisInf = 'Приводит к ожирению,\n создает доп. нагрузку на почки,\n' \
-                                 ' способствует выщелачиванию\n минералов из костной ткани'
+                self.fatDisInf = 'Приводит к атеросклерозу,\n' \
+                                 'ишемической болезни сердца,\n' \
+                                 'ожирению, желчнокаменной болезни,\n' \
+                                 'ухудшает усвоение белков, кальция, магния'
             self.pushFatDiseases.show()
         else:
             self.fat_advice.setText('Кол-во потребляемых жиров в порядке')
@@ -185,12 +199,18 @@ class AdviceWindow(QMainWindow):
         if abs(consume[2] - normal[2]) > 100:
             if consume[2] - normal[2] < -100:
                 self.carbohydrate_advice.setText('Нужно увеличить кол-во потребляемых углеводов')
-                self.ch_diseasesDisInf = 'Приводит к сухости, дряблости,\n шелушению кожи,\n слабсоти, обезвоживанию,\n' \
-                                         'ухудшению зрения,\n концентрации, памяти и\n сердечно-сосудистой системы'
+                self.ch_diseasesDisInf = 'Приводит к слабости,\n' \
+                                         'сонливости,\n' \
+                                         'головокружению, головной боли\n' \
+                                         'Чувству голода, тошноте,\n' \
+                                         'потливости, дрожи рук'
             elif consume[2] - normal[2] > 100:
-                self.carbohydrate_advice.setText('Нужно уменьшить кол-во потребляемых жиров')
-                self.ch_diseasesDisInf = 'Приводит к ожирению,\n создает доп. нагрузку на почки,\n' \
-                                         ' способствует выщелачиванию\n минералов из костной ткани'
+                self.carbohydrate_advice.setText('Нужно уменьшить кол-во потребляемых углеводов')
+                self.ch_diseasesDisInf = 'Приводит к ожирению,\n' \
+                                         'сахарному диабету,\n' \
+                                         'гипергликемии,\n' \
+                                         'сердечно-сосудистым\n' \
+                                         'заболеваниям'
             self.pushCarbohydrateDiseases.show()
         else:
             self.carbohydrate_advice.setText('Кол-во потребляемых углеводов в порядке')
@@ -198,12 +218,13 @@ class AdviceWindow(QMainWindow):
         if abs(consume[3] - normal[3]) > 100:
             if consume[3] - normal[3] < -100:
                 self.Kkal_advice.setText('Нужно увеличить кол-во потребляемых калорий')
-                self.Kkal_diseasesDisInf = 'Приводит к сухости, дряблости,\n шелушению кожи,\n слабсоти, обезвоживанию,\n' \
-                                           'ухудшению зрения,\n концентрации, памяти и\n сердечно-сосудистой системы'
+                self.Kkal_diseasesDisInf = 'Приводит к усталости,\n' \
+                                           'избыточному похудению\n' \
+                                           '(см. выбранный образ жизни)'
             elif consume[3] - normal[3] > 100:
                 self.Kkal_advice.setText('Нужно уменьшить кол-во потребляемых калорий')
-                self.Kkal_diseasesDisInf = 'Приводит к ожирению,\n создает доп. нагрузку на почки,\n' \
-                                           ' способствует выщелачиванию\n минералов из костной ткани'
+                self.Kkal_diseasesDisInf = 'Приводит к избыточному весу\n' \
+                                           '(см. выбранный образ жизни)'
             self.pushKkalDiseases.show()
         else:
             self.Kkal_advice.setText('Кол-во потребляемых калорий в порядке')
@@ -326,6 +347,7 @@ class StatisticWindow(QMainWindow):
         self.zero_plot.resize(300, 330)
         self.zero_plot.show()
 
+    def set_pfc_information(self):
         with open("DATABASE.txt") as file:
             data, days = [0, 0, 0, 0], 0
             for line in file.readlines()[-7:]:
