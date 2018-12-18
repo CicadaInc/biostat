@@ -27,7 +27,6 @@ class MainMenu(QMainWindow):
         # Подкличение функционала к кнопкам
         self.pushStart.clicked.connect(lambda: show_window(self, startWin))
         self.pushStatistic.clicked.connect(lambda: show_window(self, statisticWin))
-        self.pushAbout.clicked.connect(lambda: show_window(self, progInfo))
         self.pushAdvices.clicked.connect(lambda: show_window(self, adviceWin))
         self.pushClean.clicked.connect(self.clean_progress)
         self.pushExit.clicked.connect(self.close)
@@ -385,20 +384,6 @@ class StatisticWindow(QMainWindow):
         return stat
 
 
-class ProgramInformation(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.setFixedSize(800, 500)
-        self.init_UI()
-
-    def init_UI(self):
-        set_background(self)
-
-        uic.loadUi('program_info.ui', self)
-
-        self.pushBackFromInfo.clicked.connect(lambda: show_window(self, mainWin))
-
-
 class DialogCount(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -507,7 +492,6 @@ app = QApplication(sys.argv)
 mainWin = MainMenu()
 startWin = StartWindow()
 statisticWin = StatisticWindow()
-progInfo = ProgramInformation()
 dialogWin = DialogCount()
 dialogWin2 = StartQuestions()
 diseasesWin = Diseases()

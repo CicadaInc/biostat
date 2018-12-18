@@ -21,7 +21,7 @@
     <property name="geometry">
      <rect>
       <x>570</x>
-      <y>130</y>
+      <y>170</y>
       <width>211</width>
       <height>41</height>
      </rect>
@@ -63,7 +63,7 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
     <property name="geometry">
      <rect>
       <x>570</x>
-      <y>190</y>
+      <y>230</y>
       <width>211</width>
       <height>30</height>
      </rect>
@@ -87,7 +87,7 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
     <property name="geometry">
      <rect>
       <x>570</x>
-      <y>290</y>
+      <y>330</y>
       <width>211</width>
       <height>30</height>
      </rect>
@@ -123,35 +123,11 @@ QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid
      <string>version 1.0.0</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushAbout">
-    <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>340</y>
-      <width>211</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {font: 13pt &quot;verdana&quot;;
-background-color: rgb(255, 255, 255);
-border-radius: 2px;
-border: 2px solid #9a9;
-box-shadow: 4px 4px 4px rgba(8, 8, 8, 0.5)}
-QPushButton:hover {background-color: rgba(231, 253, 255, 0.7); border: 2px solid #9a9;}</string>
-    </property>
-    <property name="text">
-     <string>О ПРОГРАММЕ</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushAdvices">
     <property name="geometry">
      <rect>
       <x>570</x>
-      <y>240</y>
+      <y>280</y>
       <width>211</width>
       <height>30</height>
      </rect>
