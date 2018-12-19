@@ -1,26 +1,34 @@
-import smtplib
-from email.mime.text import MIMEText
-from email.header import Header
+class StatisticWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setFixedSize(800, 500)
+        self.init_UI()
 
-HISTORY = 'LOL'
+    def init_UI(self):
+        set_background(self)
 
-# Настройки
-mail_sender = 'biostat18@mail.ru'
-mail_receiver = 'biostat18@mail.ru'
-username = 'biostat18@mail.ru'
-password = 'qwerty3301'
-server = smtplib.SMTP('smtp.mail.ru:587')
+        uic.loadUi('statistic.ui', self)
 
-# Формируем тело письма
-subject = 'Привет всем Маркам!'
-# subject = 'Приветик ' + mail_sender + '!' # + mail_sender
-body = HISTORY
-msg = MIMEText(body, 'plain', 'utf-8')
-msg['Subject'] = Header(subject, 'utf-8')
+        self.pushBackFromStatistic.clicked.connect(lambda: back_to_main(self))
 
-# Отпавляем письмо
-server.starttls()
-server.ehlo()
-server.login(username, password)
-server.sendmail(mail_sender, mail_receiver, msg.as_string())
-server.quit()
+        self.chooseBox.addItem('Белки')
+        self.chooseBox.addItem('Жиры')
+        self.chooseBox.addItem('Углеводы')
+        self.chooseBox.addItem('Ккал')
+
+        self.pushBuild.clicked.connect(lambda: self.edit_graphic(self.chooseBox.currentText()))
+
+    def edit_graphic(self, choose):
+        print(choose)
+        if choose == 'Белки':
+            self.graph.plot([i for i in range(10)], [i for i in range(10)], pen='b')
+        elif choose == 'Жиры':
+            self.graph.plot([i for i in range(10)], [i for i in range(10)], pen='b')
+        elif choose == 'Углеводы':
+            self.graph.plot([i for i in range(10)], [i for i in range(10)], pen='b')
+        else:
+            self.graph.plot([i for i in range(10)], [i for i in range(10)], pen='b')
+
+
+pyqtgraph.setConfigOption('background', QColor(244, 244, 244))
+pyqtgraph.setConfigOption('foreground', QColor(0, 0, 0))
