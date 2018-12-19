@@ -508,3 +508,4 @@ adviceWin = AdviceWindow()
 resultWin = Result()
 
 sys.exit(app.exec_())
+                                
