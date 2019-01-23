@@ -9,7 +9,7 @@ import pygame
 mainWin0 = NewMainMenu()
 
 while True:
-    if mainWin0.pushed == pygame.Rect(375, 400, 250, 50):
+    if mainWin0.pushed == pygame.Rect(611, 400, 75, 50):
         mainWin = MainMenu()
         if mainWin.pushed == pygame.Rect(375, 150, 251, 51):  # Играть
             chooseChar = ChooseCharacter()

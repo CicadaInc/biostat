@@ -10,12 +10,13 @@ class NewMainMenu:
         self.winHeight = 600
         self.screen = pygame.display.set_mode((self.winWidth, self.winHeight))
 
-        self.y = 60
+        self.x, self.y = 400, 450
 
         self.pushed = None
 
         self.set_interface()
 
+        push = False
         running = True
         while running:
             for event in pygame.event.get():
@@ -23,41 +24,32 @@ class NewMainMenu:
                     self.pushed = 'exit'
                     running = False
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    for i in range(len(self.buttons)):
-                        if self.buttons[i].collidepoint(event.pos):
-                            self.fall_coin()
-                            self.pushed = self.buttons[i]
-                            running = False
+                    if self.coinRect.collidepoint(event.pos):
+                        push = True
+                        x_, y_ = event.pos[0] - self.x, event.pos[1] - self.y
+                if event.type == pygame.MOUSEBUTTONUP:
+                    push = False
+                if event.type == pygame.MOUSEMOTION and push:
+                    self.x, self.y = event.pos
+                    self.x -= x_
+                    self.y -= y_
 
-            pygame.display.flip()
-
-    def fall_coin(self):
-        clock = pygame.time.Clock()
-        print(clock.tick())
-        running = True
-        while running:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.pushed = 'exit'
-                    running = False
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    pass
-
-            if self.y < 410:
-                self.y += 15
-            else:
-                break
+            if self.buttons[0].collidepoint((self.x - 25, self.y - 30)):
+                self.pushed = self.buttons[0]
+                running = False
 
             self.render()
 
-            pygame.display.update()
+            pygame.display.flip()
 
     def render(self):
         self.screen.blit(self.background_surf, self.background_rect)
 
+        pygame.draw.rect(self.screen, (0, 0, 0), self.buttons[0])
+
         self.screen.blit(self.text, (self.text_x, self.text_y))
 
-        self.coinRect = self.coin.get_rect(bottomright=(520, self.y))
+        self.coinRect = self.coin.get_rect(bottomright=(self.x, self.y))
         self.screen.blit(self.coin, self.coinRect)
 
     def set_interface(self):
@@ -77,9 +69,9 @@ class NewMainMenu:
 
         # КНОПКИ
         self.buttons = [pygame.draw.rect(self.screen, (0, 0, 0),
-                                         pygame.Rect(375, 400, 250, 50))]
-        self.text = font.render('Insert coin', 1, (218, 114, 3))
-        self.text_x, self.text_y = 500 - self.text.get_width() // 2, 400 + 25 - self.text.get_height() // 2
+                                         pygame.Rect(611, 400, 75, 50))]
+        self.text = font.render('--> DONATION <--', 1, (218, 114, 3))
+        self.text_x, self.text_y = 650 - self.text.get_width() // 2, 400 + 25 - self.text.get_height() // 2
         self.screen.blit(self.text, (self.text_x, self.text_y))
 
         # МОНЕТКА
