@@ -18,7 +18,7 @@ class MainMenu:
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.pushed = self.buttons[3]
+                    self.pushed = self.buttons[-1]
                     running = False
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     for i in range(len(self.buttons)):
@@ -42,9 +42,9 @@ class MainMenu:
         pygame.mixer.music.play(-1)
         pygame.mixer.music.set_volume(0.3)
 
-        self.buttons, names = [], ['Продолжить', 'Новая игра', 'Настройки', 'Выход']
+        self.buttons, names = [], ['Продолжить', 'Настройки', 'Выход']
         font = pygame.font.Font('sprites/freesansbold.ttf', 30)
-        for y in range(150, 451, 100):
+        for y in range(150, 351, 100):
             pygame.draw.rect(self.screen, (250, 175, 255),
                              pygame.Rect(75, y + 50, 250, 50))
             self.buttons.append(pygame.draw.rect(self.screen, pygame.Color('black'),

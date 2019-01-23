@@ -91,15 +91,6 @@ class ChooseCharacter:
         text_x, text_y = 850 - text_start.get_width() // 2, 550 - text_start.get_height()
         self.screen.blit(text_start, (text_x, text_y))
 
-        # ПЕРСОНАЖИ В ОКНАХ
-        # characters = ['cock', 'alien', 'bird']
-        # for x in range(150, 451, 150):
-        #     char_surf = pg.image.load(
-        # directory + '/sprites/' + characters[x // 150 - 1] + '/run/run_0.png')
-        # char_surf = pg.transform.scale(char_surf, (100, 100))
-        # char_rect = char_surf.get_rect(bottomright=(x, 250))
-        # self.screen.blit(char_surf, char_rect)
-
         # НАДПИСИ
         text_view = self.font.render("Выберите персонажа", 1, (100, 25, 100))
         text_x, text_y = 65, 60
