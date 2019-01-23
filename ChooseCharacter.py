@@ -69,12 +69,19 @@ class ChooseCharacter:
         self.screen.blit(text_back, (text_x, text_y))
 
         # ОКНА ПЕРСОНАЖЕЙ
-        self.chooseButtons, self.chooseCharacters = [], []
+        self.chooseButtons = []
+        i = 0
         for y in range(150, 301, 150):
             for x in range(50, 351, 150):
+                i += 1
                 pygame.draw.rect(self.screen, (250, 175, 255), pygame.Rect(x, y, 100, 100))
                 self.chooseButtons.append(pygame.draw.rect(self.screen, pygame.Color('black'),
                                                            pygame.Rect(x, y, 100, 100), 2))
+
+                character = pygame.image.load('sprites/characters/' + str(i) + '.png')
+                character = pygame.transform.scale(character, (97, 97))
+                self.screen.blit(character, (x + 2, y + 2))
+
         pygame.draw.rect(self.screen, pygame.Color('red'), self.chooseButtons[self.choosed], 2)
 
         # КНОПКА СТАРТА
