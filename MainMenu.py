@@ -32,7 +32,7 @@ class MainMenu:
         directory = os.getcwd()
 
         # LOAD BACKGROUND
-        background_surf = pygame.image.load(directory + '/backgrounds/main1.jpg')
+        background_surf = pygame.image.load(directory + '/backgrounds/quizFone.jpg')
         background_surf = pygame.transform.scale(background_surf, (1000, 600))
         background_rect = background_surf.get_rect(bottomright=(1000, 600))
         self.screen.blit(background_surf, background_rect)

@@ -10,7 +10,7 @@ class NewMainMenu:
         self.winHeight = 600
         self.screen = pygame.display.set_mode((self.winWidth, self.winHeight))
 
-        self.x, self.y = 400, 450
+        self.x, self.y = 250, 445
 
         self.pushed = None
 
@@ -49,6 +49,8 @@ class NewMainMenu:
 
         self.screen.blit(self.text, (self.text_x, self.text_y))
 
+        self.screen.blit(self.automat, self.automatRect)
+
         self.coinRect = self.coin.get_rect(bottomright=(self.x, self.y))
         self.screen.blit(self.coin, self.coinRect)
 
@@ -67,17 +69,23 @@ class NewMainMenu:
 
         font = pygame.font.Font('sprites/freesansbold.ttf', 30)
 
-        # КНОПКИ
+        # КНОПКИ И НАДПИСИ
         self.buttons = [pygame.draw.rect(self.screen, (0, 0, 0),
-                                         pygame.Rect(611, 400, 75, 50))]
-        self.text = font.render('--> DONATION <--', 1, (218, 114, 3))
-        self.text_x, self.text_y = 650 - self.text.get_width() // 2, 400 + 25 - self.text.get_height() // 2
+                                         pygame.Rect(624, 392, 90, 40))]
+        self.text = font.render('<<<------', 1, (218, 114, 3))
+        self.text_x, self.text_y = 795 - self.text.get_width() // 2, 385 + 25 - self.text.get_height() // 2
         self.screen.blit(self.text, (self.text_x, self.text_y))
+
+        # АВТОМАТ
+        self.automat = pygame.image.load('sprites/Game_building.jpg')
+        self.automat = pygame.transform.scale(self.automat, (280, 70))
+        self.automatRect = self.automat.get_rect(bottomright=(720, self.y))
+        self.screen.blit(self.automat, self.automatRect)
 
         # МОНЕТКА
         self.coin = pygame.image.load('sprites/coin.png')
         self.coin = pygame.transform.scale(self.coin, (50, 60))
-        self.coinRect = self.coin.get_rect(bottomright=(520, self.y))
+        self.coinRect = self.coin.get_rect(bottomright=(self.x, self.y))
         self.screen.blit(self.coin, self.coinRect)
 
 

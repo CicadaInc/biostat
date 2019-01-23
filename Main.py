@@ -9,7 +9,7 @@ import pygame
 mainWin0 = NewMainMenu()
 
 while True:
-    if mainWin0.pushed == pygame.Rect(611, 400, 75, 50):
+    if mainWin0.pushed == pygame.Rect(624, 392, 90, 40):
         mainWin = MainMenu()
         if mainWin.pushed == pygame.Rect(75, 200, 251, 51):  # Продолжить
             chooseChar = ChooseCharacter()
@@ -25,6 +25,8 @@ while True:
                     elif lvlWin.pushed == pygame.Rect(50, 515, 201, 36):
                         chooseChar = ChooseCharacter()
                         continue
+                    elif lvlWin.pushed == 'exit':
+                        break
                     else:
                         break
             else:
