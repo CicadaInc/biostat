@@ -40,14 +40,14 @@ while True:
             if chooseChar.pushed == pygame.Rect(50, 515, 201, 36):
                 mainWin = MainMenu()
             if chooseChar.pushed == pygame.Rect(750, 515, 200, 36):
-                    gameWin = Multiplayer()
-                    try:
-                        if gameWin.pushed:
-                            pass
-                        else:
-                            break
-                    except Exception:
-                        print("Come back")
+                gameWin = Multiplayer()
+                try:
+                    if gameWin.pushed:
+                        pass
+                    else:
+                        break
+                except Exception:
+                    print("Come back")
             else:
                 break
 
@@ -58,4 +58,3 @@ while True:
         pass
     elif mainWin.pushed == pygame.Rect(375, 450, 251, 51):  # Выход
         break
-

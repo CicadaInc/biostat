@@ -87,9 +87,9 @@ class ChooseCharacter:
         # ПЕРСОНАЖИ В ОКНАХ
         # characters = ['cock', 'alien', 'bird']
         # for x in range(150, 451, 150):
-        #     char_surf = pygame.image.load(
+        #     char_surf = pg.image.load(
         # directory + '/sprites/' + characters[x // 150 - 1] + '/run/run_0.png')
-        # char_surf = pygame.transform.scale(char_surf, (100, 100))
+        # char_surf = pg.transform.scale(char_surf, (100, 100))
         # char_rect = char_surf.get_rect(bottomright=(x, 250))
         # self.screen.blit(char_surf, char_rect)
 

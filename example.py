@@ -3,7 +3,7 @@ from pygame.locals import *
 import pygame, sys, eztext
 
 def main():
-    # initialize pygame
+    # initialize pg
     pygame.init()
     # create the screen
     screen = pygame.display.set_mode((640,240))
@@ -13,7 +13,7 @@ def main():
     # create an input with a max length of 45,
     # and a red color and a prompt saying 'type here: '
     txtbx = eztext.Input(maxlength=45, color=(255,0,0), prompt='type here: ')
-    # create the pygame clock
+    # create the pg clock
     clock = pygame.time.Clock()
     # main loop!
 
