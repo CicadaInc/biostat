@@ -11,12 +11,11 @@ mainWin0 = NewMainMenu()
 while True:
     if mainWin0.pushed == pygame.Rect(611, 400, 75, 50):
         mainWin = MainMenu()
-        if mainWin.pushed == pygame.Rect(375, 150, 251, 51):  # Играть
+        if mainWin.pushed == pygame.Rect(75, 200, 251, 51):  # Продолжить
             chooseChar = ChooseCharacter()
             if chooseChar.pushed:
                 if chooseChar.pushed == pygame.Rect(50, 515, 201, 36):  # Назад
-                    mainWin = NewMainMenu()
-
+                    continue
                 elif chooseChar.pushed == pygame.Rect(750, 515, 201, 36):  # Старт
                     lvlWin = LevelMenu()
                     if lvlWin.pushed == pygame.Rect(750, 515, 201, 36):
@@ -31,11 +30,10 @@ while True:
             else:
                 break
 
-        elif mainWin.pushed == pygame.Rect(375, 250, 251, 51):  # Мультиплеер
+        elif mainWin.pushed == pygame.Rect(75, 300, 251, 51):  # Новая игра
             chooseChar = ChooseCharacter()
             if chooseChar.pushed:
                 if chooseChar.pushed == pygame.Rect(50, 515, 201, 36):
-                    mainWin = NewMainMenu()
                     continue
                 if chooseChar.pushed == pygame.Rect(750, 515, 201, 36):
                     gameWin = Multiplayer.play()
@@ -47,9 +45,9 @@ while True:
             else:
                 break
 
-        elif mainWin.pushed == pygame.Rect(375, 350, 251, 51):  # Настройки
+        elif mainWin.pushed == pygame.Rect(75, 400, 251, 51):  # Настройки
             pass
-        elif mainWin.pushed == pygame.Rect(375, 450, 251, 51):  # Выход
+        elif mainWin.pushed == pygame.Rect(75, 500, 251, 51):  # Выход
             break
     elif mainWin0.pushed == 'exit':
         break
