@@ -11,7 +11,7 @@ class LevelMenu:
         self.winHeight = 600
         self.screen = pygame.display.set_mode((self.winWidth, self.winHeight))
 
-        self.font = pygame.font.Font(None, 50)
+        self.font = pygame.font.Font('sprites/freesansbold.ttf', 30)
 
         self.set_interface()
 
@@ -53,7 +53,7 @@ class LevelMenu:
         self.screen.blit(background_surf, background_rect)
 
         self.buttons, names = [], ['Sonata','...', '...']
-        font = pygame.font.Font(None, 50)
+        font = pygame.font.Font('sprites/freesansbold.ttf', 30)
 
         # BUTTON BACK
         pygame.draw.rect(self.screen, (250, 175, 255), pygame.Rect(50, 515, 200, 35))

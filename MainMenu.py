@@ -32,7 +32,7 @@ class MainMenu:
         directory = os.getcwd()
 
         # LOAD BACKGROUND
-        background_surf = pygame.image.load(directory + '/backgrounds/main.jpg')
+        background_surf = pygame.image.load(directory + '/backgrounds/main.png')
         background_surf = pygame.transform.scale(background_surf, (1000, 600))
         background_rect = background_surf.get_rect(bottomright=(1000, 600))
         self.screen.blit(background_surf, background_rect)
@@ -43,7 +43,7 @@ class MainMenu:
         pygame.mixer.music.set_volume(0.3)
 
         self.buttons, names = [], ['Играть', 'Мультиплеер', 'Настройки', 'Выход']
-        font = pygame.font.Font(None, 50)
+        font = pygame.font.Font('sprites/freesansbold.ttf', 30)
         for y in range(150, 451, 100):
             pygame.draw.rect(self.screen, (250, 175, 255),
                              pygame.Rect(375, y, 250, 50))

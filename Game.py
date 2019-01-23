@@ -26,6 +26,8 @@ class Game():
         self.left = None
         self.up = None
 
+        self.pushed = None
+
         self.anim, self.speed = 0, 6
 
         run = True
@@ -35,6 +37,7 @@ class Game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
+                    self.pushed = 'exit'
 
             if self.x < 0:
                 self.x = 0

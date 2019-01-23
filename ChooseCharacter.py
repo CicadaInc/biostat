@@ -9,13 +9,13 @@ class ChooseCharacter:
 
         self.screen = pygame.display.set_mode((1000, 600))
         self.text = ''
-        self.font = pygame.font.Font(None, 50)
+        self.font = pygame.font.Font('sprites/freesansbold.ttf', 30)
         self.choosed = 0
 
         self.pushed = None
 
         textbox = eztext.Input(maxlength=10, color=(0, 0, 0), prompt='',
-                               font=pygame.font.Font(None, 40))
+                               font=pygame.font.Font('sprites/freesansbold.ttf', 30))
         textbox.set_pos(670, 155)
 
         self.set_interface()
