@@ -12,6 +12,8 @@ class MainMenu:
 
         self.pushed = None
 
+        pygame.mouse.set_visible(True)
+
         self.set_interface()
 
         running = True
