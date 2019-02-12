@@ -2,15 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c9fb9acd-d6a1-4189-83a6-f329ab9fd331" name="Default" comment="">
-<<<<<<< HEAD
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/thequiz.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/thequiz.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChooseCharacter.py" beforeDir="false" afterPath="$PROJECT_DIR$/ChooseCharacter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainMenu.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewMainMenu.py" beforeDir="false" afterPath="$PROJECT_DIR$/NewMainMenu.py" afterDir="false" />
-=======
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ChooseCharacter.py" beforeDir="false" afterPath="$PROJECT_DIR$/ChooseCharacter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game.py" afterDir="false" />
@@ -20,7 +11,6 @@
       <change beforePath="$PROJECT_DIR$/sprites/1(Townfolk-Child-M-001)/RIGHT_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/sprites/1(Townfolk-Child-M-001)/RIGHT_1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprites/2(Townfolk-Child-M)/LEFT_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/sprites/2(Townfolk-Child-M)/LEFT_1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprites/6(Cultist)/LEFT_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/sprites/6(Cultist)/LEFT_1.png" afterDir="false" />
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,19 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-<<<<<<< HEAD
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
-=======
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
               <caret line="10" column="39" lean-forward="true" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -51,12 +33,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-<<<<<<< HEAD
-        <entry file="file://$PROJECT_DIR$/MainMenu.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
-=======
         <entry file="file://$PROJECT_DIR$/field.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-76" />
@@ -68,7 +44,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="281">
               <caret line="48" selection-start-line="48" selection-end-line="48" />
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -76,19 +51,11 @@
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/NewMainMenu.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="834">
-              <caret line="94" column="14" selection-start-line="94" selection-start-column="14" selection-end-line="94" selection-end-column="14" />
-=======
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NewMainMenu.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-8">
               <caret line="58" column="23" lean-forward="true" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -96,10 +63,6 @@
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
-    </leaf>
-  </component>
-=======
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Game.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -129,7 +92,6 @@
       <replace>24, 24</replace>
     </replaceStrings>
   </component>
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -140,14 +102,6 @@
         <option value="$USER_HOME$/AppData/Local/Temp/Rar$DRa0.716/mouse.py" />
         <option value="$PROJECT_DIR$/NewMainMenu.py" />
         <option value="$PROJECT_DIR$/MainMenu.py" />
-<<<<<<< HEAD
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="width" value="960" />
-    <option name="height" value="1050" />
-=======
         <option value="$PROJECT_DIR$/Game.py" />
       </list>
     </option>
@@ -156,17 +110,13 @@
     <option name="x" value="683" />
     <option name="width" value="683" />
     <option name="height" value="738" />
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-<<<<<<< HEAD
-=======
       <pane id="Scope" />
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -178,19 +128,11 @@
           <select />
         </subPane>
       </pane>
-<<<<<<< HEAD
-      <pane id="Scope" />
-=======
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-<<<<<<< HEAD
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
-=======
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -204,9 +146,6 @@
       </list>
     </option>
   </component>
-<<<<<<< HEAD
-  <component name="RunManager" selected="Python.Main">
-=======
   <component name="RunManager" selected="Python.Game">
     <configuration name="Game" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="thequiz" />
@@ -229,7 +168,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
     <configuration name="Main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="thequiz" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -297,17 +235,11 @@
       <item itemvalue="Python.Main" />
       <item itemvalue="Python.NewMainMenu" />
       <item itemvalue="Python.MainMenu" />
-<<<<<<< HEAD
-    </list>
-    <recent_temporary>
-      <list>
-=======
       <item itemvalue="Python.Game" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.Game" />
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
         <item itemvalue="Python.Main" />
         <item itemvalue="Python.MainMenu" />
         <item itemvalue="Python.NewMainMenu" />
@@ -328,28 +260,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-<<<<<<< HEAD
-    <frame x="0" y="0" width="960" height="1050" extended-state="7" />
-    <editor active="true" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.159436" />
-=======
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17423134" />
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-<<<<<<< HEAD
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32985386" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-=======
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32866043" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39719626" />
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -364,32 +284,15 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DRa0.716/mouse.py" />
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/Main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-=======
     <entry file="file://$PROJECT_DIR$/ChooseCharacter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1581">
           <folding>
             <element signature="e#0#13#0" expanded="true" />
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
           </folding>
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/MainMenu.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-=======
     <entry file="file://$PROJECT_DIR$/sprites/Overworld.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -429,17 +332,12 @@
           <caret line="106" column="106" lean-forward="true" selection-start-line="106" selection-start-column="98" selection-end-line="106" selection-end-column="100" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/NewMainMenu.py">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="834">
-          <caret line="94" column="14" selection-start-line="94" selection-start-column="14" selection-end-line="94" selection-end-column="14" />
-=======
         <state relative-caret-position="-8">
           <caret line="58" column="23" lean-forward="true" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
           <folding>
@@ -452,15 +350,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
           <caret line="48" selection-start-line="48" selection-end-line="48" />
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
-=======
     <entry file="file://$PROJECT_DIR$/Main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -471,6 +366,5 @@
         </state>
       </provider>
     </entry>
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
   </component>
 </project>

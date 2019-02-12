@@ -69,10 +69,6 @@ class NewMainMenu:
         self.background_surf = pygame.image.load(directory + '/backgrounds/main.jpg')
         self.background_surf = pygame.transform.scale(self.background_surf, (1000, 600))
         self.background_rect = self.background_surf.get_rect(bottomright=(1000, 600))
-<<<<<<< HEAD
-        self.screen.blit(self.background_surf, self.background_rect)
-=======
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
 
         # LOAD MUSIC
         pygame.mixer.music.load(directory + '/sounds/loading.mp3')
@@ -86,28 +82,16 @@ class NewMainMenu:
                                          pygame.Rect(624, 392, 90, 40))]
         self.text = font.render('<<<------', 1, (218, 114, 3))
         self.text_x, self.text_y = 795 - self.text.get_width() // 2, 385 + 25 - self.text.get_height() // 2
-<<<<<<< HEAD
-        self.screen.blit(self.text, (self.text_x, self.text_y))
-=======
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
 
         # АВТОМАТ
         self.automat = pygame.image.load('sprites/Game_building.jpg')
         self.automat = pygame.transform.scale(self.automat, (280, 70))
         self.automatRect = self.automat.get_rect(bottomright=(720, self.y))
-<<<<<<< HEAD
-        self.screen.blit(self.automat, self.automatRect)
-=======
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
 
         # МОНЕТКА
         self.coin = pygame.image.load('sprites/coin.png')
         self.coin = pygame.transform.scale(self.coin, (50, 60))
         self.coinRect = self.coin.get_rect(bottomright=(self.x, self.y))
-<<<<<<< HEAD
-        self.screen.blit(self.coin, self.coinRect)
-=======
->>>>>>> 2e721446d5d6b615a33604de3db2da8c2b010659
 
 
 if __name__ == "__main__":
