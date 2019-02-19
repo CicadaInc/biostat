@@ -2,6 +2,7 @@ import os
 import pygame
 from create_field import field
 from Pause import Pause
+import DialogueNpc
 
 
 class Game:
@@ -28,17 +29,21 @@ class Game:
         self.right = None
         self.up = None
 
-        font = pygame.font.SysFont('Trebuchet MS', 12)
-        font.set_bold(True)
-        self.nick = font.render(name, False, pygame.Color('blue'))
+        self.name = name
+
+        self.font = pygame.font.SysFont('Trebuchet MS', 12)
+        self.font.set_bold(True)
+
+        self.font1 = pygame.font.SysFont('Trebuchet MS', 20)
 
         self.k = 0
 
         self.pushed = None
 
-        self.anim, self.speed = 0, 2
+        self.anim, self.speed = 0, 10
 
-        self.load_background()
+        self.set_interface()
+        self.load_npc()
 
         running = True
         while running:
@@ -54,10 +59,17 @@ class Game:
                         if p.pushed == p.quit:
                             self.pushed = 'exit_main'
                             running = False
+                    if event.key == 101:
+                        if abs(self.npc1_x - self.startx) < 50 and abs(self.npc1_y - self.starty) < 50:
+                            phrases = DialogueNpc.create_dialogue1()
+                            dialogue = DialogueNpc.Dialogue1(self.screen, self, phrases)
+                            if dialogue.pushed == 'exit':
+                                self.pushed = 'exit'
+                                running = False
 
             x, y = self.winx - self.winw // 2, self.winy - self.winh // 2
-            print(y // 36, x // 36)
-            print(self.winx, self.winy)
+            # print(y // 36, x // 36)
+            # print(self.winx, self.winy)
 
             keys = pygame.key.get_pressed()
             if keys[pygame.K_LEFT]:
@@ -109,12 +121,20 @@ class Game:
         self.STAY = pygame.transform.scale(
             pygame.image.load(self.directory + "/sprites/" + self.character + "/STAY" + '.png'), (48, 64))
 
-    def load_background(self):
+    def load_npc(self):
+        self.oldMan = pygame.transform.scale(
+            pygame.image.load(self.directory + '/sprites/OldMan.png'), (48, 64))
+
+    def set_interface(self):
         # LOAD BACKGROUND
         self.background_surf = pygame.image.load(self.directory + '/levels/MainLocation.png')
-        # self.background_surf = pygame.transform.scale(self.background_surf, (self.winw, self.winh))
         self.background_rect = self.background_surf.get_rect(bottomright=(self.winx, self.winy))
         self.screen.blit(self.background_surf, self.background_rect)
+
+        self.nick = self.font.render(self.name, 1, pygame.Color('blue'))
+        self.nameNpc1 = self.font.render("Brain Fuck", 1, pygame.Color('blue'))
+        self.controls1 = self.font1.render("esc - Пауза", 1, (0, 0, 0))
+        self.controls2 = self.font1.render("e - Взаимодействовать", 1, (0, 0, 0))
 
     def render(self):
         self.screen.fill((0, 0, 0))
@@ -124,6 +144,14 @@ class Game:
 
         self.screen.blit(self.nick, (self.startx - self.nick.get_width() // 2 + 24,
                                      self.starty - self.nick.get_height() // 2))
+        self.npc1_x, self.npc1_y = 1150 + (self.winx - 2852), -550 + self.winy - 1805
+        self.screen.blit(self.nameNpc1, (self.npc1_x - 10, self.npc1_y - 20))
+        self.screen.blit(self.oldMan, (self.npc1_x, self.npc1_y))
+
+        self.screen.blit(self.controls1, (780, 525))
+        self.screen.blit(self.controls2, (780, 550))
+
+        print((1150 + (self.winx - 2852), -450 + self.winy - 1805))
 
         if self.anim + 1 >= 30:
             self.anim = 0
