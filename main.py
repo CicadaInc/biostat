@@ -2,7 +2,7 @@ from MainMenu import MainMenu
 from NewMainMenu import NewMainMenu
 from ChooseCharacter import ChooseCharacter
 from Game import Game
-from field import field
+from MoreInformation import Information
 import pygame
 
 mainWin0 = NewMainMenu()
@@ -19,16 +19,20 @@ while True:
                     continue
                 elif chooseChar.pushed == pygame.Rect(750, 515, 200, 35):  # Старт
                     hero = HEROES[chooseChar.choosed]
-                    gameWin = Game('The Quiz', 468, 210, "MainLocation.png", field, hero, 2300, 1550)
+                    gameWin = Game(hero, chooseChar.nick)
                     if gameWin.pushed == 'exit':
                         break
+                    elif gameWin.pushed == 'exit_main':
+                        continue
                 elif chooseChar.pushed == 'exit':
                     break
             else:
                 break
 
-        elif mainWin.pushed == pygame.Rect(58, 225, 300, 80):  # Настройки
-            pass
+        elif mainWin.pushed == pygame.Rect(55, 225, 300, 80):  # Настройки
+            inf = Information()
+            if inf.pushed == 'exit':
+                break
         elif mainWin.pushed == pygame.Rect(55, 325, 300, 80):  # Выход
             break
     elif mainWin0.pushed == 'exit':

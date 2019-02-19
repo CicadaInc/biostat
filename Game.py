@@ -1,18 +1,20 @@
 import os
 import pygame
+from create_field import field
+from Pause import Pause
 
 
 class Game:
-    def __init__(self, caption, startx, starty, level, field, character, winx, winy):
+    def __init__(self, character, name):
         pygame.init()
 
         self.winw, self.winh = 1000, 600
-        self.winx, self.winy = winx, winy
+        self.winx, self.winy = 2852, 1805
 
         self.screen = pygame.display.set_mode((1000, 600))
-        pygame.display.set_caption(caption)
+        pygame.display.set_caption("TheQuiz")
 
-        self.level = level
+        self.level = field
         self.directory = os.getcwd()
 
         self.character = character
@@ -22,59 +24,69 @@ class Game:
 
         self.clock = pygame.time.Clock()
 
-        self.startx, self.starty = startx, starty
+        self.startx, self.starty = 468, 210
         self.right = None
         self.up = None
 
+        font = pygame.font.SysFont('Trebuchet MS', 12)
+        font.set_bold(True)
+        self.nick = font.render(name, False, pygame.Color('blue'))
+
+        self.k = 0
+
         self.pushed = None
 
-        self.anim, self.speed = 0, 3
+        self.anim, self.speed = 0, 2
 
         self.load_background()
 
-        run = True
-        while run:
-            self.clock.tick(30)
+        running = True
+        while running:
+            self.clock.tick(60)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    run = False
+                    running = False
                     self.pushed = 'exit'
+                if event.type == pygame.KEYDOWN:
+                    if event.key == 27:
+                        p = Pause(self.screen, self)
+                        if p.pushed == p.quit:
+                            self.pushed = 'exit_main'
+                            running = False
 
             x, y = self.winx - self.winw // 2, self.winy - self.winh // 2
-            self.speed = 4
-            cell = field[y // 36][x // 36]
-            print(field[y // 36][((x + 24) // 36)])
             print(y // 36, x // 36)
+            print(self.winx, self.winy)
 
             keys = pygame.key.get_pressed()
-            if keys[pygame.K_LEFT] and field[y // 36][((x + 24) // 36)] in [0, 3, 4]:
+            if keys[pygame.K_LEFT]:
                 self.winx += self.speed
                 self.left, self.up = True, None
-            elif keys[pygame.K_RIGHT] and field[y // 36][(x - 24) // 36] in [0, 3, 4]:
+            elif keys[pygame.K_RIGHT]:
                 self.winx -= self.speed
                 self.left, self.up = False, None
-            elif keys[pygame.K_UP] and field[(y + 16) // 36][x // 36] in [0, 3, 4]:
+            elif keys[pygame.K_UP]:
                 self.winy += self.speed
                 self.up, self.left = True, None
-            elif keys[pygame.K_DOWN] and field[(y - 16) // 36][x // 36] in [0, 3, 4]:
+            elif keys[pygame.K_DOWN]:
                 self.winy -= self.speed
                 self.up, self.left = False, None
             else:
                 self.left, self.up = None, None
                 self.anim = 0
 
-            if self.winx > 4236:
-                self.winx = 4236
-            if self.winx < 500:
-                self.winx = 500
-            if self.winy > 2472:
-                self.winy = 2472
-            if self.winy < 300:
-                self.winy = 300
+            if self.winx > 4736:
+                self.winx = 4736
+            if self.winx < 1001:
+                self.winx = 1001
+            if self.winy > 2803:
+                self.winy = 2803
+            if self.winy < 600:
+                self.winy = 600
 
             self.render()
-            pygame.display.update()
+            pygame.display.flip()
 
     def load_animations(self):
         for i in range(1, 4):
@@ -99,7 +111,7 @@ class Game:
 
     def load_background(self):
         # LOAD BACKGROUND
-        self.background_surf = pygame.image.load(self.directory + '/levels/' + self.level)
+        self.background_surf = pygame.image.load(self.directory + '/levels/MainLocation.png')
         # self.background_surf = pygame.transform.scale(self.background_surf, (self.winw, self.winh))
         self.background_rect = self.background_surf.get_rect(bottomright=(self.winx, self.winy))
         self.screen.blit(self.background_surf, self.background_rect)
@@ -110,6 +122,9 @@ class Game:
         self.background_rect = self.background_surf.get_rect(bottomright=(self.winx, self.winy))
         self.screen.blit(self.background_surf, self.background_rect)
 
+        self.screen.blit(self.nick, (self.startx - self.nick.get_width() // 2 + 24,
+                                     self.starty - self.nick.get_height() // 2))
+
         if self.anim + 1 >= 30:
             self.anim = 0
 
@@ -117,6 +132,9 @@ class Game:
             self.screen.blit(self.STAY, (self.startx, self.starty))
             self.anim = 0
         else:
+            if int(self.k) == 1:
+                self.anim += 1
+                self.k = 0
             if not self.left and not (self.left is None):
                 self.screen.blit(self.walkRight[self.anim % 3], (self.startx, self.starty))
             elif self.left:
@@ -125,19 +143,16 @@ class Game:
                 self.screen.blit(self.walkUp[self.anim % 3], (self.startx, self.starty))
             elif not self.up:
                 self.screen.blit(self.walkDown[self.anim % 3], (self.startx, self.starty))
-            self.anim += 1
+            self.k += 0.15
 
 
 if __name__ == "__main__":
-    from create_field import field
-
-
     def test():
         HEROES = ['1(Townfolk-Child-M-001)', '2(Townfolk-Child-M)', '3(Townfolk-Adult-M-006)',
                   '4(coriander publish.)', '5(Mushroom-01)', '6(Cultist)']
 
         hero = HEROES[1]
-        Game('The Quiz', 468, 210, "MainLocation.png", field, hero, 2300, 1550)
+        Game(hero, "SuperHero")
 
 
     test()
